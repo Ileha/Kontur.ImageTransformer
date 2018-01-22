@@ -3,14 +3,25 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Text.RegularExpressions;
+using Kontur.ImageTransformer.Exceptions;
 
 namespace Kontur.ImageTransformer
 {
     internal class AsyncHttpServer : IDisposable
     {
+        private readonly HttpListener listener;
+
+        private Thread listenerThread;
+        private bool disposed;
+        private volatile bool isRunning;
+        
+        private Regex request_parser;
         public AsyncHttpServer()
         {
             listener = new HttpListener();
+            request_parser = new Regex("process/(?<method>[\\w\\d()]+)/(?<rectangle>[\\d-+,]+)");
         }
         
         public void Start(string prefix)
@@ -74,7 +85,7 @@ namespace Kontur.ImageTransformer
                         var context = listener.GetContext();
                         Task.Run(() => HandleContextAsync(context));
                     }
-                    else Thread.Sleep(0);
+                    //else Thread.Sleep(0);
                 }
                 catch (ThreadAbortException)
                 {
@@ -90,16 +101,58 @@ namespace Kontur.ImageTransformer
         private async Task HandleContextAsync(HttpListenerContext listenerContext)
         {
             // TODO: implement request handling
-
-            listenerContext.Response.StatusCode = (int)HttpStatusCode.OK;
+            StatusCode Code = new StatusCode(HttpStatusCode.OK, false);
+            try {
+                string method;
+                int[] digits = new int[4];
+                ParseURL(listenerContext.Request.RawUrl, out method, ref digits);
+                Bitmap b = new Bitmap(listenerContext.Request.InputStream);
+                Bitmap crop_b = Crop(b, GetRectangleFromZero(digits[0], digits[1], digits[2], digits[3], b));
+                crop_b.Save("test.png");
+            }
+            catch (StatusCode code) {
+                Code = code;
+            }
+            //b.Save("test.png");
+            listenerContext.Response.StatusCode = Code.ToInt;
             using (var writer = new StreamWriter(listenerContext.Response.OutputStream))
                 writer.WriteLine("Hello, world!");
         }
 
-        private readonly HttpListener listener;
+        private void ParseURL(string URL, out string method, ref int[] selection) {
+            Match m = request_parser.Match(URL);
+            if (!m.Success) { throw new StatusCode(HttpStatusCode.BadRequest, true); }
+            method = m.Groups["method"].Value;
+            string[] digits = Regex.Split(m.Groups["rectangle"].Value, ",");
+            for (int i = 0; i < selection.Length; i++) {
+                try { 
+                    selection[i] = Convert.ToInt32(digits[i]);
+                }
+                catch (Exception err) {
+                    throw new StatusCode(HttpStatusCode.BadRequest, true);
+                }
+            }
+        }
+        private Rectangle GetRectangleFromZero(int x, int y, int w, int h, Bitmap image) {
+            int new_x = 0, new_y = 0, new_w = 0, new_h = 0;
+            
+            if (x > w || y > h) { throw new StatusCode(HttpStatusCode.BadRequest, true); }
+            
+            if (x < 0) { new_x = 0; new_w = w + x; }
+            else { new_x = x; new_w = w; }
+            if (new_w > image.Width) { new_w = image.Width; }
 
-        private Thread listenerThread;
-        private bool disposed;
-        private volatile bool isRunning;
+            if (y < 0) { new_y = 0; new_h = h + y; }
+            else { new_y = y; new_h = h; }
+            if (new_h > image.Height) { new_h = image.Height; }
+
+            return new Rectangle(new_x, new_y, new_w, new_h);
+        }
+
+        private Bitmap Crop(Bitmap image, Rectangle selection) {
+            Bitmap cropBmp = image.Clone(selection, image.PixelFormat);
+            image.Dispose();
+            return cropBmp;
+        }
     }
 }
