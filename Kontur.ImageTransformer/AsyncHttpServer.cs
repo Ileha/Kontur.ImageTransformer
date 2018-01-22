@@ -103,12 +103,14 @@ namespace Kontur.ImageTransformer
             // TODO: implement request handling
             StatusCode Code = new StatusCode(HttpStatusCode.OK, false);
             try {
+                if (listenerContext.Request.HttpMethod != "POST") { throw new StatusCode(HttpStatusCode.BadRequest, true); }
+                if (listenerContext.Request.ContentLength64 > 102400) { throw new StatusCode(HttpStatusCode.BadRequest, true); }
                 string method;
                 int[] digits = new int[4];
                 ParseURL(listenerContext.Request.RawUrl, out method, ref digits);
                 Bitmap b = new Bitmap(listenerContext.Request.InputStream);
                 Bitmap crop_b = Crop(b, GetRectangleFromZero(digits[0], digits[1], digits[2], digits[3], b));
-                crop_b.Save("test.png");
+                //crop_b.Save("test.png");
             }
             catch (StatusCode code) {
                 Code = code;
@@ -136,15 +138,15 @@ namespace Kontur.ImageTransformer
         private Rectangle GetRectangleFromZero(int x, int y, int w, int h, Bitmap image) {
             int new_x = 0, new_y = 0, new_w = 0, new_h = 0;
             
-            if (x > w || y > h) { throw new StatusCode(HttpStatusCode.BadRequest, true); }
+            if (w <= 0 || h <= 0) { throw new StatusCode(HttpStatusCode.NoContent, true); }
             
             if (x < 0) { new_x = 0; new_w = w + x; }
             else { new_x = x; new_w = w; }
-            if (new_w > image.Width) { new_w = image.Width; }
+            if (new_x+new_w > image.Width) { new_w = image.Width-new_x; }
 
             if (y < 0) { new_y = 0; new_h = h + y; }
             else { new_y = y; new_h = h; }
-            if (new_h > image.Height) { new_h = image.Height; }
+            if (new_y+new_h > image.Height) { new_h = image.Height-new_y; }
 
             return new Rectangle(new_x, new_y, new_w, new_h);
         }
