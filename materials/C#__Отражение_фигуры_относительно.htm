@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+<meta charset="UTF-8" />
+<title>C#: Отражение фигуры относительно прямой линии | Блог доброго программиста</title>
+<meta name="keywords" content="Саратов,блог,программист,сервисы,примеры,исходники,статьи,C#,PHP,C++,1C,1С,Javascript,Простыми словами">
+<meta name="description" content="Блог доброго программиста на C#, 1С, PHP, JS, HTML, CSS из Саратова - это множество полезной информации о программировании и разработке. Здесь Вы найдете примеры, исходники, алгоритмы, полезные online сервисы и многое другое">
+<meta name="author" content="2011-2018 (c) Маматов Андрей">
+<meta name="verify-admitad" content="7ccdc213dd" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name='yandex-verification' content='77f0ab5de4418ba5' />
+<meta name='wmail-verification' content='a33ed63005183c315dbd8128a287a469' />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="https://blog.foolsoft.ru/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Блог доброго программиста &raquo; Лента" href="https://blog.foolsoft.ru/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Блог доброго программиста &raquo; Лента комментариев" href="https://blog.foolsoft.ru/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Блог доброго программиста &raquo; Лента комментариев к &laquo;C#: Отражение фигуры относительно прямой линии&raquo;" href="https://blog.foolsoft.ru/c-otrazhenie-figury-otnositelno-pryamoj-linii/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/blog.foolsoft.ru\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.4"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='https://blog.foolsoft.ru/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://blog.foolsoft.ru/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://blog.foolsoft.ru/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='MySQL: Join, Left Join, Right Join или &#171;Джоины простыми словами&#187;' href='https://blog.foolsoft.ru/mysql-join-left-join-right-join-ili-dzhoiny-prostymi-slovami/' />
+<link rel='next' title='C#: Как сравнить строку с номером версии' href='https://blog.foolsoft.ru/c-kak-sravnit-stroku-s-nomerom-versii/' />
+<meta name="generator" content="WordPress 4.9.4" />
+<link rel="canonical" href="https://blog.foolsoft.ru/c-otrazhenie-figury-otnositelno-pryamoj-linii/" />
+<link rel='shortlink' href='https://blog.foolsoft.ru/?p=2303' />
+<link rel="alternate" type="application/json+oembed" href="https://blog.foolsoft.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.foolsoft.ru%2Fc-otrazhenie-figury-otnositelno-pryamoj-linii%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://blog.foolsoft.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.foolsoft.ru%2Fc-otrazhenie-figury-otnositelno-pryamoj-linii%2F&#038;format=xml" />
+<script type="text/javascript">
+	window._se_plugin_version = '8.1.9';
+</script>
+<script type="text/javascript" src="https://blog.foolsoft.ru/wp-content/plugins/si-captcha-for-wordpress/captcha/si_captcha.js?ver=1519077206"></script>
+<!-- begin SI CAPTCHA Anti-Spam - login/register form style -->
+<style type="text/css">
+.si_captcha_small { width:175px; height:45px; padding-top:10px; padding-bottom:10px; }
+.si_captcha_large { width:250px; height:60px; padding-top:10px; padding-bottom:10px; }
+img#si_image_com { border-style:none; margin:0; padding-right:5px; float:left; }
+img#si_image_reg { border-style:none; margin:0; padding-right:5px; float:left; }
+img#si_image_log { border-style:none; margin:0; padding-right:5px; float:left; }
+img#si_image_side_login { border-style:none; margin:0; padding-right:5px; float:left; }
+img#si_image_checkout { border-style:none; margin:0; padding-right:5px; float:left; }
+img#si_image_jetpack { border-style:none; margin:0; padding-right:5px; float:left; }
+img#si_image_bbpress_topic { border-style:none; margin:0; padding-right:5px; float:left; }
+.si_captcha_refresh { border-style:none; margin:0; vertical-align:bottom; }
+div#si_captcha_input { display:block; padding-top:15px; padding-bottom:5px; }
+label#si_captcha_code_label { margin:0; }
+input#si_captcha_code_input { width:65px; }
+p#si_captcha_code_p { clear: left; padding-top:10px; }
+.si-captcha-jetpack-error { color:#DC3232; }
+</style>
+<!-- end SI CAPTCHA Anti-Spam - login/register form style -->
+<link rel="stylesheet" type="text/css" media="all" href="/wp-content/plugins/bootstrap/css/bootstrap.min.css?v=1.00" />
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js?v=1.00"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js?v=1.00"></script>
+<![endif]-->
+<script src="/wp-content/themes/fs/js/jq.js?v=1.00"></script>
+<script async="async" src="//cdn-rtb.sape.ru/rtb-b/js/590/2/27590.js" type="text/javascript"></script>
+</head>
+<body class="post-template-default single single-post postid-2303 single-format-standard" itemscope itemtype="http://schema.org/Blog">
+<div id="wrapper">
+    <div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner" class="container">
+								<div id="site-title" class="pull-left">
+					<a href="https://blog.foolsoft.ru/" title="Блог доброго программиста" rel="home">Блог доброго программиста</a>
+				</div>
+										<img class="margin-t-10 pull-right hidden-xs" src="https://blog.foolsoft.ru/wp-content/uploads/2013/04/1131.jpg" title="Блог программиста" alt="Блог доброго программиста" />
+								        <div class='clearfix'></div>
+            </div>
+
+            <nav id="access" class="margin-tb-10 navbar navbar-inverse navbar-static-top" role="navigation">
+              <div class="hidden-xs">
+                <div class="menu-main-menu-container"><ul id="menu-main-menu" class="container"><li id="menu-item-1606" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1606"><a title="Блог программиста" href="/">Главная</a></li>
+<li id="menu-item-1607" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1607"><a href="https://blog.foolsoft.ru/category/vopros-otvet/">Вопрос-ответ</a></li>
+<li id="menu-item-1609" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1609"><a href="https://blog.foolsoft.ru/servisy/">Сервисы</a>
+<ul class="sub-menu">
+	<li id="menu-item-1625" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1625"><a href="https://blog.foolsoft.ru/servisy/vebmasteram/">Вебмастерам</a></li>
+	<li id="menu-item-1627" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1627"><a href="https://blog.foolsoft.ru/servisy/zagotovki-funkcij-na-c/">Заготовки функций на C#</a></li>
+	<li id="menu-item-1629" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1629"><a href="https://blog.foolsoft.ru/servisy/otpravit-e-mail/">Решение задач</a></li>
+	<li id="menu-item-1630" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1630"><a href="https://blog.foolsoft.ru/servisy/reshenie-prostyx-zadach/">Решение простых задач</a></li>
+	<li id="menu-item-1632" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1632"><a href="https://blog.foolsoft.ru/servisy/shablony-regulyarnyx-vyrazhenij/">Шаблоны регулярных выражений — Online</a></li>
+	<li id="menu-item-1633" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1633"><a href="https://blog.foolsoft.ru/servisy/zagruzka-fajlov/">Загрузка файлов</a></li>
+</ul>
+</li>
+</ul></div>              </div>
+              <div class="pull-right" id="up-btn" onclick="window.scrollTo(0, 0);"></div>
+              <div class='clearfix'></div>
+            </nav>
+
+            <!--<div style="padding:10px;"class="border">
+                <b>Объявление.</b> Разыскивается программист с <b>хотя бы</b> базовыми знаниями
+                в PHP||&&JS||&&JQUERY||&&HTML||&&CSS для выполнения небольших (по началу)
+                задач (freelance). Студент Вы, школьник или кто-то другой - значения не имеет. Основное требование
+                базовые знания указанных языков, стремление учится, наличие свободного времени, ответственность,
+                умение искать нужную информацию в Интернете. Оплата по договоренности. Заинтересованным
+                писать через форму по <a title="Обратная связь" target="_blank" href="http://foolsoft.ru/ru/page/kontakti/">данной ссылке</a>.
+                Обязательно указывайте Ваши навыки и примеры сделанных программ/скриптов (при наличии).
+            </div>-->
+
+		</div>
+	</div>
+	<div id="main" class="margin-t-10 container">
+        <div class="row"><div id="container">
+	<div id="content" role="main" class="col-lg-9 col-md-9 container">
+        
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous pull-left"><a href="https://blog.foolsoft.ru/mysql-join-left-join-right-join-ili-dzhoiny-prostymi-slovami/" rel="prev"><span class="meta-nav">&larr;</span> MySQL: Join, Left Join, Right Join или &#171;Джоины простыми словами&#187;</a></div>
+					<div class="nav-next pull-right"><a href="https://blog.foolsoft.ru/c-kak-sravnit-stroku-s-nomerom-versii/" rel="next">C#: Как сравнить строку с номером версии <span class="meta-nav">&rarr;</span></a></div>
+                    <div class="clearfix"></div>
+                </div>
+
+				<div id="post-2303" class="padding-10 margin-tb-10 post-2303 post type-post status-publish format-standard hentry category-c tag-c tag-reflection tag-rotate tag-sample tag-algoritm tag-grafika tag-otrazhenie tag-povorot tag-14 tag-figura">
+					<h1 itemprop='name' class="entry-title">C#: Отражение фигуры относительно прямой линии</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Дата:</span> <a href="https://blog.foolsoft.ru/c-otrazhenie-figury-otnositelno-pryamoj-linii/" title="20:13" rel="bookmark"><span itemprop="datePublished" class="entry-date">13.04.2017</span></a> <span class="meta-sep">. Автор: </span> <span itemprop="author"><span class="author vcard"><a class="url fn n" href="https://blog.foolsoft.ru/author/admin/" title="Посмотреть все записи автора Admin">Admin</a></span></span>					</div>
+
+                    <div class="entry-content" itemprop='description articleBody'>
+                                                <!--noindex-->
+                        <div class="adblock" style="margin:10px 0;">
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9629315730432479" data-ad-slot="7223618213" data-ad-format="auto"></ins>
+                        <script>setTimeout(function() { (adsbygoogle = window.adsbygoogle || []).push({}); }, 250)</script>
+                        </div>
+                        <!--/noindex-->
+                        <p>Не так давно мне необходимо было реализовать алгоритм отражения объекта относительно заданной прямой, которая выходит из начала координат. На удивление задача оказалась интересной, так как пришлось немножко подумать&#8230;.<span id="more-2303"></span></p>
+<p>На самом деле задача отражения фигуры относительно заданной прямой это три задачи. Первая &#8212; это сдвиг фигуры по оси X, Вторая &#8212; <a href="/c-povorot-figury-otnositelno-zadannoj-tochki-ili-nachala-koordinat/" title="Как повернуть фигуру программно">поворот фигуры на заданный угол</a>, Третья &#8212; отражение фигуры относительно оси X.</p>
+<p>Почему задачи три? Все просто. Само отражение фигуры (относительно оси X) &#8212; очень простая задача. Все что необходимо сделать &#8212; поменять знак координаты Y у всех точек фигуры. Если говорить об отражении относительно оси Y, то знак нужно менять у координат X. Однако в данном случае роль зеркала играет ось X (та самая прямая относительно которой нужно сделать поворот). Поэтому если мы говорим о задаче отражения фигуры относительно какой-либо прямой, то нам нужно проделать следующие шаги:</p>
+<p>1) Сдвинуть прямую и отражаемую фигуру влево или вправо по оси X на N пикселей. Где N количество пикселей, чтобы прямая проходила через начало координат;<br />
+2) Повернуть прямую и отражаемую фигуру на alpha градусов, так чтобы наша прямая &#171;слилась&#187; с осью X;<br />
+3) Отразить нашу фигуру относительно нужной плоскости;<br />
+4) Повернуть прямую и отражаемую фигуру на -alpha градусов;<br />
+5) Сдвинуть прямую и отражаемую фигуру вправо или влево по оси X на N пикселей;</p>
+<p>Так как в моем условии прямая проходила через начало координат, то пункты 1 и 5 в моем примере будут опущены.</p>
+<p>Решение задачи выглядит так:<br />
+Создаем приложение Windows Forms и добавляем компонент PictureBox. Открываем код события загрузки формы Form1_Load и в нем пишем следующий код.</p>
+<pre>
+//Полагаем что начало координат это левый верхний угол формы.
+pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+Graphics g = Graphics.FromImage(pictureBox1.Image);
+
+int x = 200, y = 300, w = 200, h = 100; //координаты прямоугольника исходные
+int lineX = 400, lineY = 400; //координаты второй точки линии, проходящей через начало координат
+
+g.DrawLine(Pens.LightBlue, new Point(0, 0), new Point(lineX, lineY)); //линия относительно которой отражаем
+g.DrawRectangle(Pens.Black, x, y, w, h); //исходный прямоугольник
+
+double rotate = -Math.Atan(lineX / lineY); //угол на который нужно повернуть фигуру, чтобы линия совпала с осью Ox
+
+//поворачиваем прямоугольник на данный угол
+var p = new PointF[] {
+    new PointF((float)(x * Math.Cos(rotate) - y * Math.Sin(rotate)), (float)(x * Math.Sin(rotate) + y * Math.Cos(rotate))),
+    new PointF((float)((x + w) * Math.Cos(rotate) - y * Math.Sin(rotate)), (float)((x + w) * Math.Sin(rotate) + y * Math.Cos(rotate))),
+    new PointF((float)((x + w) * Math.Cos(rotate) - (y + h) * Math.Sin(rotate)), (float)((x + w) * Math.Sin(rotate) + (y + h) * Math.Cos(rotate))),
+    new PointF((float)(x * Math.Cos(rotate) - (y + h) * Math.Sin(rotate)), (float)(x * Math.Sin(rotate) + (y + h) * Math.Cos(rotate))),
+};
+
+//зеркальное отражение относительно oX
+for(int i = 0; i < p.Length; ++i)
+{
+    p[i].Y = -p[i].Y ;
+}
+
+//поворачиваем прямоугольник назад на тот же угол
+rotate = -rotate;
+var p3 = new PointF[] {
+    new PointF((float)(p[0].X * Math.Cos(rotate) - p[0].Y * Math.Sin(rotate)), (float)(p[0].X * Math.Sin(rotate) + p[0].Y * Math.Cos(rotate))),
+    new PointF((float)(p[1].X * Math.Cos(rotate) - p[1].Y * Math.Sin(rotate)), (float)(p[1].X * Math.Sin(rotate) + p[1].Y * Math.Cos(rotate))),
+    new PointF((float)(p[2].X * Math.Cos(rotate) - p[2].Y * Math.Sin(rotate)), (float)(p[2].X * Math.Sin(rotate) + p[2].Y * Math.Cos(rotate))),
+    new PointF((float)(p[3].X * Math.Cos(rotate) - p[3].Y * Math.Sin(rotate)), (float)(p[3].X * Math.Sin(rotate) + p[3].Y * Math.Cos(rotate))),
+
+};
+
+//рисуем отражение красным цветом
+g.DrawPolygon(Pens.Red, p3);
+</pre>
+
+                        					</div>
+
+                    <div class="row">
+					<div class="col-md-6 col-lg-6 entry-utility">
+						Запись опубликована в рубрике <a href="https://blog.foolsoft.ru/category/c/" rel="category tag">C#</a> с метками <a href="https://blog.foolsoft.ru/tag/c/" rel="tag">C#</a>, <a href="https://blog.foolsoft.ru/tag/reflection/" rel="tag">reflection</a>, <a href="https://blog.foolsoft.ru/tag/rotate/" rel="tag">rotate</a>, <a href="https://blog.foolsoft.ru/tag/sample/" rel="tag">Sample</a>, <a href="https://blog.foolsoft.ru/tag/algoritm/" rel="tag">алгоритм</a>, <a href="https://blog.foolsoft.ru/tag/grafika/" rel="tag">графика</a>, <a href="https://blog.foolsoft.ru/tag/otrazhenie/" rel="tag">отражение</a>, <a href="https://blog.foolsoft.ru/tag/povorot/" rel="tag">поворот</a>, <a href="https://blog.foolsoft.ru/tag/%d0%bf%d1%80%d0%b8%d0%bc%d0%b5%d1%80/" rel="tag">Пример</a>, <a href="https://blog.foolsoft.ru/tag/figura/" rel="tag">фигура</a>. Добавьте в закладки <a href="https://blog.foolsoft.ru/c-otrazhenie-figury-otnositelno-pryamoj-linii/" title="Постоянная ссылка: C#: Отражение фигуры относительно прямой линии" rel="bookmark">постоянную ссылку</a>.											</div>
+                    <!--noindex-->
+                    <div class="col-md-6 col-lg-6" id="advertur_103355"></div>
+                    <script type="text/javascript">
+                          (function(w, d, n) {
+                              w[n] = w[n] || [];
+                              w[n].push({
+                                  section_id: 103355,
+                                  place: "advertur_103355",
+                                  width: 300,
+                                  height: 250
+                              });
+                          })(window, document, "advertur_sections");
+                      </script>
+                      <script type="text/javascript" src="//ddnk.advertur.ru/v1/s/loader.js" async></script>
+                      <!--/noindex-->
+                    <div style="clear:both"></div>
+                    </div>
+				</div>
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous pull-left"><a href="https://blog.foolsoft.ru/mysql-join-left-join-right-join-ili-dzhoiny-prostymi-slovami/" rel="prev"><span class="meta-nav">&larr;</span> MySQL: Join, Left Join, Right Join или &#171;Джоины простыми словами&#187;</a></div>
+					<div class="nav-next pull-right"><a href="https://blog.foolsoft.ru/c-kak-sravnit-stroku-s-nomerom-versii/" rel="next">C#: Как сравнить строку с номером версии <span class="meta-nav">&rarr;</span></a></div>
+                    <div class="clearfix"></div>
+                </div>
+
+        <div class='hentry margin-t-10'>
+          <center>
+                        <div id="vk_comments" class="margin-t-10"></div>
+          </center>
+                  </div>
+
+    </div>
+</div>
+<div id="primary" class="widget-area col-lg-3 col-md-3" role="complementary">
+    <ul class="xoxo">
+    <li id="text-7" class="widget-container widget_text"><h3 class="widget-title">Поделись с друзьями!</h3>			<div class="textwidget"><!--noindex--><script async type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+<div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="yaru,vkontakte,facebook,twitter,odnoklassniki,moimir,lj,moikrug"></div> <!--/noindex--><div class="clearfix"></div></div>
+		</li><li id="text-10" class="widget-container widget_text"><h3 class="widget-title">Language</h3>			<div class="textwidget"><div id="google_translate_element"></div><script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'ru',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+</script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script></div>
+		</li><li id="text-4" class="widget-container widget_text">			<div class="textwidget"><!--noindex-->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-9629315730432479"
+     data-ad-slot="0462721974"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!--/noindex-->
+</div>
+		</li><li id="text-2" class="widget-container widget_text"><h3 class="widget-title">Поиск</h3>			<div class="textwidget"><form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-9629315730432479:2787806526" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="search" name="q" class="margin-b-10 form-control google-search" />
+    <input type="submit" class="btn btn-default" name="sa" value="Искать" />
+  </div>
+</form></div>
+		</li><li id="text-6" class="widget-container widget_text"><h3 class="widget-title">Поиск Google для разработчиков</h3>			<div class="textwidget"><a href="http://search.foolsoft.ru/"  title="Поиск Google для программистов" target="_blank"><img src="/wp-content/uploads/small_google_logo.jpg?v=1.00" border="0" width="180" height="75"  alt="Поиск Google для разработчиков" title="Поиск Google для программистов" /></a></div>
+		</li><li id="categories-3" class="widget-container widget_categories"><h3 class="widget-title">Категории</h3>		<ul>
+	<li class="cat-item cat-item-10"><a href="https://blog.foolsoft.ru/category/1%d1%81/" title="Все что связанно с 1С">1С</a> (13)
+</li>
+	<li class="cat-item cat-item-7"><a href="https://blog.foolsoft.ru/category/c/" title="Все что связанно с C#">C#</a> (72)
+</li>
+	<li class="cat-item cat-item-477"><a href="https://blog.foolsoft.ru/category/charp-winphone/" >C# Windows Phone</a> (2)
+</li>
+	<li class="cat-item cat-item-88"><a href="https://blog.foolsoft.ru/category/c-2/" title="Все что связанно с С++">C++</a> (1)
+</li>
+	<li class="cat-item cat-item-62"><a href="https://blog.foolsoft.ru/category/html-2/" >HTML</a> (6)
+</li>
+	<li class="cat-item cat-item-17"><a href="https://blog.foolsoft.ru/category/javascript/" title="JavaScript">JavaScript</a> (30)
+</li>
+	<li class="cat-item cat-item-687"><a href="https://blog.foolsoft.ru/category/mysql/" title="Язык запросов MySQL  простыми словами">MySQL</a> (1)
+</li>
+	<li class="cat-item cat-item-24"><a href="https://blog.foolsoft.ru/category/php/" >PHP</a> (44)
+</li>
+	<li class="cat-item cat-item-356"><a href="https://blog.foolsoft.ru/category/vopros-otvet/" title="В данном разделе будут находится рубрики вопрос ответ. Т.е. здесь не будет подробных описаний действий, есть вопрос, есть ответ. Для тех кому надо и не надо тоже. Все вопросы можете присылать используя данную страницу.">Вопрос-ответ</a> (26)
+</li>
+	<li class="cat-item cat-item-217"><a href="https://blog.foolsoft.ru/category/drugie-yazyki-i-texnologii/" title="Статьи и заметки о других языках программирования, компьютерах, автоматизации и т.п.">Другие языки и технологии</a> (2)
+</li>
+	<li class="cat-item cat-item-247"><a href="https://blog.foolsoft.ru/category/interesnye-momenty/" title="Интересные новости, сайты, вещи и т.д.">Интересные моменты</a> (2)
+</li>
+	<li class="cat-item cat-item-451"><a href="https://blog.foolsoft.ru/category/obzory/" >Обзоры</a> (2)
+</li>
+	<li class="cat-item cat-item-4"><a href="https://blog.foolsoft.ru/category/proshhe-govorya/" title="Проще говоря.">Проще говоря</a> (17)
+</li>
+	<li class="cat-item cat-item-535"><a href="https://blog.foolsoft.ru/category/uchebnoe-posobie-c/" title="Мини книга для тех, кто хочет научится писать программы на языке программирования CSharp (C#)">Учебное пособие C#</a> (5)
+</li>
+		</ul>
+</li><li id="text-9" class="widget-container widget_text"><h3 class="widget-title">Меня читает весь мир</h3>			<div class="textwidget"><!--noindex-->
+<script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?u=khll&d=e27zrl4M9PQ6XfQHJcvS88DKdbBzo3hfOQfvk43-qRI" async></script>
+<!--/noindex--></div>
+		</li>	</ul>
+			
+    <ul class="xoxo scrollable-block hidden-xs" id="wm-link">
+      <li>
+          <!--noindex-->
+                                        <!--/noindex-->
+      </li>
+    </ul>
+</div>
+
+</div></div>
+
+<div id="footer" class="container" role="contentinfo">
+    <div class="row">
+			<div id="footer-widget-area" role="complementary">
+
+				<div id="first" class="widget-area">
+					<ul class="xoxo-footer">
+						<li id="text-3" class="col-lg-3 col-md-3 widget-container widget_text"><h3 class="widget-title">Статистика и кнопочки</h3>			<div class="textwidget"><!--noindex-->
+<a href="http://www.host-food.ru/p/6081/" target="_blank"><img src="//blog.foolsoft.ru/downloads/host-food.gif?v=1.00" alt="Качественный и недорогой хостинг" title="Качественный и недорогой хостинг" width="88" height="31" /></a>
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='http://www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t14.5;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet: показано число просмотров за 24"+
+" часа, посетителей за 24 часа и за сегодня' "+
+"border='0' width='88' height='31'><\/a>")
+//--></script>
+
+
+<script id="top100Counter" type="text/javascript" src="//counter.rambler.ru/top100.jcn?2564610"></script>
+<noscript>
+<a href="http://top100.rambler.ru/navi/2564610/">
+<img src="//counter.rambler.ru/top100.cnt?2564610" alt="Rambler's Top100" border="0" />
+</a></noscript>
+
+<!-- Rating@Mail.ru counter -->
+<script type="text/javascript">
+var _tmr = _tmr || [];
+_tmr.push({id: "2697136", type: "pageView", start: (new Date()).getTime()});
+(function (d, w, id) {
+  if (d.getElementById(id)) return;
+  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+  ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
+  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window, "topmailru-code");
+</script><noscript><div style="position:absolute;left:-10000px;">
+<img src="//top-fwz1.mail.ru/counter?id=2697136;js=na" style="border:0;" height="1" width="1" alt="Рейтинг@Mail.ru" />
+</div></noscript>
+<!-- //Rating@Mail.ru counter -->
+
+<!-- Yandex.Metrika informer --><a href="https://metrika.yandex.ru/stat/?id=10211737&amp;from=informer"target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/10211737/3_1_FFFFFFFF_EFEFEFFF_0_pageviews"style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:10211737,lang:'ru'});return false}catch(e){}" /></a><!-- /Yandex.Metrika informer --> <!-- Yandex.Metrika counter --><script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter10211737 = new Ya.Metrika({ id:10211737, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/10211737" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+</center>
+<!--/noindex--></div>
+		</li><li id="text-12" class="col-lg-3 col-md-3 widget-container widget_text"><h3 class="widget-title">А так же</h3>			<div class="textwidget"><a href="http://services.foolsoft.ru/" target="_blank"  title="Сервисы">Сервисы от foolsoft.ru</a>
+<br />
+<a href="http://www.windowsphone.com/en-us/store/app/mybuffer/1bfa7913-8aad-4b56-b339-2de43fc4d2c0" target="_blank" rel="nofollow" title="Я на windows-phone.com">Приложения для Windows-Phone</a>
+<br />
+<a href="http://landing-editor.ru/" target="_blank"  title="Админка для посадочных страниц">Landing Editor</a>
+<br />
+<a href="http://corecms.su/" target="_blank"  title="CoreCMS">CoreCMS - Free CMS</a>
+<br />
+<a href="https://get-pay.ru/" target="_blank"  title="GetPay - Онлайн касса">Скрипт приема онлайн платежей</a>
+<br />
+<a href="https://booking-widget.ru/" target="_blank"  title="Booking Widget - Скрипт бронирования">Виджет онлайн бронирования</a>
+
+</div>
+		</li><li id="tag_cloud-3" class="col-lg-3 col-md-3 widget-container widget_tag_cloud"><h3 class="widget-title">Метки</h3><div class="tagcloud"><a href="https://blog.foolsoft.ru/tag/1c/" class="tag-cloud-link tag-link-43 tag-link-position-1" style="font-size: 8pt;" aria-label="1C (3 элемента)">1C</a>
+<a href="https://blog.foolsoft.ru/tag/1%d1%81/" class="tag-cloud-link tag-link-505 tag-link-position-2" style="font-size: 11pt;" aria-label="1С (7 элементов)">1С</a>
+<a href="https://blog.foolsoft.ru/tag/ajax/" class="tag-cloud-link tag-link-101 tag-link-position-3" style="font-size: 8pt;" aria-label="ajax (3 элемента)">ajax</a>
+<a href="https://blog.foolsoft.ru/tag/api/" class="tag-cloud-link tag-link-20 tag-link-position-4" style="font-size: 8pt;" aria-label="API (3 элемента)">API</a>
+<a href="https://blog.foolsoft.ru/tag/c/" class="tag-cloud-link tag-link-504 tag-link-position-5" style="font-size: 20.1pt;" aria-label="C# (63 элемента)">C#</a>
+<a href="https://blog.foolsoft.ru/tag/captcha/" class="tag-cloud-link tag-link-61 tag-link-position-6" style="font-size: 8pt;" aria-label="CAPTCHA (3 элемента)">CAPTCHA</a>
+<a href="https://blog.foolsoft.ru/tag/class/" class="tag-cloud-link tag-link-237 tag-link-position-7" style="font-size: 11pt;" aria-label="Class (7 элементов)">Class</a>
+<a href="https://blog.foolsoft.ru/tag/control/" class="tag-cloud-link tag-link-140 tag-link-position-8" style="font-size: 8pt;" aria-label="Control (3 элемента)">Control</a>
+<a href="https://blog.foolsoft.ru/tag/css/" class="tag-cloud-link tag-link-151 tag-link-position-9" style="font-size: 10.5pt;" aria-label="css (6 элементов)">css</a>
+<a href="https://blog.foolsoft.ru/tag/dbf/" class="tag-cloud-link tag-link-11 tag-link-position-10" style="font-size: 8pt;" aria-label="DBF (3 элемента)">DBF</a>
+<a href="https://blog.foolsoft.ru/tag/delegate/" class="tag-cloud-link tag-link-73 tag-link-position-11" style="font-size: 8pt;" aria-label="delegate (3 элемента)">delegate</a>
+<a href="https://blog.foolsoft.ru/tag/extension/" class="tag-cloud-link tag-link-113 tag-link-position-12" style="font-size: 8pt;" aria-label="Extension (3 элемента)">Extension</a>
+<a href="https://blog.foolsoft.ru/tag/files/" class="tag-cloud-link tag-link-107 tag-link-position-13" style="font-size: 9pt;" aria-label="Files (4 элемента)">Files</a>
+<a href="https://blog.foolsoft.ru/tag/function/" class="tag-cloud-link tag-link-184 tag-link-position-14" style="font-size: 10.5pt;" aria-label="function (6 элементов)">function</a>
+<a href="https://blog.foolsoft.ru/tag/get/" class="tag-cloud-link tag-link-49 tag-link-position-15" style="font-size: 10.5pt;" aria-label="GET (6 элементов)">GET</a>
+<a href="https://blog.foolsoft.ru/tag/html/" class="tag-cloud-link tag-link-33 tag-link-position-16" style="font-size: 12.8pt;" aria-label="html (11 элементов)">html</a>
+<a href="https://blog.foolsoft.ru/tag/javascript/" class="tag-cloud-link tag-link-506 tag-link-position-17" style="font-size: 15.2pt;" aria-label="JavaScript (20 элементов)">JavaScript</a>
+<a href="https://blog.foolsoft.ru/tag/jquery/" class="tag-cloud-link tag-link-127 tag-link-position-18" style="font-size: 11pt;" aria-label="jquery (7 элементов)">jquery</a>
+<a href="https://blog.foolsoft.ru/tag/js/" class="tag-cloud-link tag-link-21 tag-link-position-19" style="font-size: 16.8pt;" aria-label="JS (29 элементов)">JS</a>
+<a href="https://blog.foolsoft.ru/tag/mysql/" class="tag-cloud-link tag-link-22 tag-link-position-20" style="font-size: 12.4pt;" aria-label="MySQL (10 элементов)">MySQL</a>
+<a href="https://blog.foolsoft.ru/tag/php/" class="tag-cloud-link tag-link-507 tag-link-position-21" style="font-size: 18.5pt;" aria-label="PHP (44 элемента)">PHP</a>
+<a href="https://blog.foolsoft.ru/tag/post/" class="tag-cloud-link tag-link-48 tag-link-position-22" style="font-size: 9.8pt;" aria-label="POST (5 элементов)">POST</a>
+<a href="https://blog.foolsoft.ru/tag/sample/" class="tag-cloud-link tag-link-80 tag-link-position-23" style="font-size: 19.3pt;" aria-label="Sample (53 элемента)">Sample</a>
+<a href="https://blog.foolsoft.ru/tag/winforms/" class="tag-cloud-link tag-link-8 tag-link-position-24" style="font-size: 9pt;" aria-label="WinForms (4 элемента)">WinForms</a>
+<a href="https://blog.foolsoft.ru/tag/%d0%b4%d0%bb%d1%8f-%d0%bd%d0%be%d0%b2%d0%b8%d1%87%d0%ba%d0%be%d0%b2/" class="tag-cloud-link tag-link-63 tag-link-position-25" style="font-size: 8pt;" aria-label="Для новичков (3 элемента)">Для новичков</a>
+<a href="https://blog.foolsoft.ru/tag/%d0%b8%d0%bd%d1%81/" class="tag-cloud-link tag-link-12 tag-link-position-26" style="font-size: 9pt;" aria-label="ИНС (4 элемента)">ИНС</a>
+<a href="https://blog.foolsoft.ru/tag/kak/" class="tag-cloud-link tag-link-159 tag-link-position-27" style="font-size: 8pt;" aria-label="Как (3 элемента)">Как</a>
+<a href="https://blog.foolsoft.ru/tag/%d0%ba%d0%be%d0%bd%d1%82%d1%80%d0%be%d0%bb/" class="tag-cloud-link tag-link-141 tag-link-position-28" style="font-size: 8pt;" aria-label="Контрол (3 элемента)">Контрол</a>
+<a href="https://blog.foolsoft.ru/tag/oshibka/" class="tag-cloud-link tag-link-397 tag-link-position-29" style="font-size: 9pt;" aria-label="Ошибка (4 элемента)">Ошибка</a>
+<a href="https://blog.foolsoft.ru/tag/%d0%bf%d1%80%d0%b8%d0%bc%d0%b5%d1%80/" class="tag-cloud-link tag-link-14 tag-link-position-30" style="font-size: 22pt;" aria-label="Пример (99 элементов)">Пример</a>
+<a href="https://blog.foolsoft.ru/tag/prostoj/" class="tag-cloud-link tag-link-199 tag-link-position-31" style="font-size: 9.8pt;" aria-label="Простой (5 элементов)">Простой</a>
+<a href="https://blog.foolsoft.ru/tag/%d1%81/" class="tag-cloud-link tag-link-64 tag-link-position-32" style="font-size: 8pt;" aria-label="С# (3 элемента)">С#</a>
+<a href="https://blog.foolsoft.ru/tag/%d1%81%d0%be%d0%b7%d0%b4%d0%b0%d1%82%d1%8c/" class="tag-cloud-link tag-link-116 tag-link-position-33" style="font-size: 11.5pt;" aria-label="Создать (8 элементов)">Создать</a>
+<a href="https://blog.foolsoft.ru/tag/%d1%84%d0%b0%d0%b9%d0%bb%d1%8b/" class="tag-cloud-link tag-link-106 tag-link-position-34" style="font-size: 9pt;" aria-label="Файлы (4 элемента)">Файлы</a>
+<a href="https://blog.foolsoft.ru/tag/%d0%b1%d0%b5%d1%81%d0%bf%d0%bb%d0%b0%d1%82%d0%bd%d0%be/" class="tag-cloud-link tag-link-78 tag-link-position-35" style="font-size: 9pt;" aria-label="бесплатно (4 элемента)">бесплатно</a>
+<a href="https://blog.foolsoft.ru/tag/vopros/" class="tag-cloud-link tag-link-246 tag-link-position-36" style="font-size: 9.8pt;" aria-label="вопрос (5 элементов)">вопрос</a>
+<a href="https://blog.foolsoft.ru/tag/%d0%b7%d0%b0%d0%bf%d1%80%d0%be%d1%81/" class="tag-cloud-link tag-link-55 tag-link-position-37" style="font-size: 10.5pt;" aria-label="запрос (6 элементов)">запрос</a>
+<a href="https://blog.foolsoft.ru/tag/kak-sozdat/" class="tag-cloud-link tag-link-268 tag-link-position-38" style="font-size: 9.8pt;" aria-label="как создать (5 элементов)">как создать</a>
+<a href="https://blog.foolsoft.ru/tag/%d0%ba%d0%bb%d0%b0%d1%81%d1%81/" class="tag-cloud-link tag-link-27 tag-link-position-39" style="font-size: 12pt;" aria-label="класс (9 элементов)">класс</a>
+<a href="https://blog.foolsoft.ru/tag/%d1%80%d0%b0%d1%81%d1%88%d0%b8%d1%80%d0%b5%d0%bd%d0%b8%d0%b5/" class="tag-cloud-link tag-link-110 tag-link-position-40" style="font-size: 8pt;" aria-label="расширение (3 элемента)">расширение</a>
+<a href="https://blog.foolsoft.ru/tag/skript/" class="tag-cloud-link tag-link-409 tag-link-position-41" style="font-size: 9pt;" aria-label="скрипт (4 элемента)">скрипт</a>
+<a href="https://blog.foolsoft.ru/tag/%d1%81%d1%82%d1%80%d1%83%d0%ba%d1%82%d1%83%d1%80%d0%b0/" class="tag-cloud-link tag-link-102 tag-link-position-42" style="font-size: 9pt;" aria-label="структура (4 элемента)">структура</a>
+<a href="https://blog.foolsoft.ru/tag/tochka/" class="tag-cloud-link tag-link-331 tag-link-position-43" style="font-size: 9pt;" aria-label="точка (4 элемента)">точка</a>
+<a href="https://blog.foolsoft.ru/tag/funkciya/" class="tag-cloud-link tag-link-183 tag-link-position-44" style="font-size: 12.4pt;" aria-label="функция (10 элементов)">функция</a>
+<a href="https://blog.foolsoft.ru/tag/%d1%87%d1%82%d0%be-%d1%82%d0%b0%d0%ba%d0%be%d0%b5/" class="tag-cloud-link tag-link-87 tag-link-position-45" style="font-size: 9.8pt;" aria-label="что такое (5 элементов)">что такое</a></div>
+</li><li id="text-5" class="col-lg-3 col-md-3 widget-container widget_text"><h3 class="widget-title">2011-2017 © Маматов Андрей</h3>			<div class="textwidget">Использование материалов с данного сайта разрешено при указании прямой ссылки на страницу с ним. 
+По вопросам сотрудничества или просто вопросам писать <a title="Связаться с программистом" class="fancybox" href="http://foolsoft.ru/ru/page/kontakti/" title="Обратная связь" target="_blank">сюда</a> или <a href="https://vk.com/aamamatov" target="_blank" rel="nofollow" title="Я Вконтакте с Вами">ВКонтакте</a>. </div>
+		</li>					</ul>
+				</div>
+
+
+
+
+			</div>
+</div>
+</div>
+<!--<div id="site-info" class="text-center margin-b-10">
+  <a href="https://blog.foolsoft.ru/" title="Блог доброго программиста" rel="home">Блог доброго программиста</a>
+</div>-->
+</div>
+<script type='text/javascript' src='https://blog.foolsoft.ru/wp-includes/js/comment-reply.min.js?ver=4.9.4'></script>
+<script type='text/javascript' src='https://blog.foolsoft.ru/wp-includes/js/wp-embed.min.js?ver=4.9.4'></script>
+<link rel="stylesheet" type="text/css" media="all" href="/wp-includes/fancybox/jquery.fancybox.css?v=1.00" />
+<link rel='stylesheet' id='se-link-styles-css'  href='/wp-content/plugins/search-everything/static/css/se-styles.css?ver=4.3.1' type='text/css' media='all' />
+<script async src="/wp-content/plugins/bootstrap/js/bootstrap.min.js?v=1.00"></script>
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?117"></script>
+<script type="text/javascript">VK.init({apiId: 3598565, onlyWidgets: true});</script>
+<script async src="/wp-content/themes/fs/js/scripts.js?v=1.00" type="text/javascript"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-67796845-1', 'auto'); ga('send', 'pageview');
+</script>
+<script async src="/wp-content/themes/fs/js/fad.js"></script>
+</body></html>

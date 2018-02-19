@@ -145,10 +145,6 @@ namespace Kontur.ImageTransformer
             });
         }
 
-        //private void Runner(client cli) {
-        //    Runner(cli.listenerContext, cli.time);
-        //}
-
         private void HandleContextAsync(HttpListenerContext listenerContext, long time)
         {
             // TODO: implement request handling
