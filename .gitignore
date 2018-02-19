@@ -10,3 +10,6 @@ obj/
 packages/
 *.backup
 .vs/
+*.DS_Store
+.AppleDouble
+.LSOverride
