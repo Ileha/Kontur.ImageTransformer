@@ -1,5 +1,11 @@
-﻿<Properties>
-  <MonoDevelop.Ide.Workbench />
+﻿<Properties StartupConfiguration="{9801585B-D1AA-4078-B9C4-7B7F8883E55E}|Default">
+  <MonoDevelop.Ide.ItemProperties.Kontur.ImageTransformer PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Kontur.ImageTransformer/AsyncHttpServer.cs">
+    <Files>
+      <File FileName="Kontur.ImageTransformer/EntryPoint.cs" Line="1" Column="1" />
+      <File FileName="Kontur.ImageTransformer/AsyncHttpServer.cs" Line="32" Column="48" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
