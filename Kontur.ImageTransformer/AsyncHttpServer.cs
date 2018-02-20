@@ -8,8 +8,9 @@ using System.Text.RegularExpressions;
 using Kontur.ImageTransformer.Exceptions;
 using System.Drawing.Imaging;
 using System.Collections.Generic;
-using Kontur.ImageTransformer.Filter;
+using Kontur.ImageTransformer.Transform;
 using System.Collections.Concurrent;
+using System.Text;
 //using System.Diagnostics;
 
 namespace Kontur.ImageTransformer
@@ -23,26 +24,26 @@ namespace Kontur.ImageTransformer
         private volatile bool isRunning;
 
         private Regex request_parser;
-        private Dictionary<string, ABSFilter> Filters;
+        private Dictionary<string, ABSTransform> Filters;
         private ConcurrentQueue<client> clients;
         private int prosess_count;
         public AsyncHttpServer()
         {
             listener = new HttpListener();
-            request_parser = new Regex("process/(?<method>[\\w\\d()]+)/(?<rectangle>[\\d-+,]+)");
-            Filters = new Dictionary<string, ABSFilter>();
+            request_parser = new Regex("process/(?<method>[\\w]+)/(?<rectangle>[\\d-+,]+)");
+            Filters = new Dictionary<string, ABSTransform>();
             clients = new ConcurrentQueue<client>();
             prosess_count = Environment.ProcessorCount - 1;
         }
 
-        public void Start(string prefix, params ABSFilter[] filters)
+        public void Start(string prefix, params ABSTransform[] filters)
         {
             lock (listener)
             {
                 if (!isRunning)
                 {
-                    foreach (ABSFilter f in filters) {
-                        Filters.Add(f.name, f);
+                    foreach (ABSTransform f in filters) {
+                        Filters.Add(f.Name, f);
                     }
 
                     listener.Prefixes.Clear();
@@ -151,20 +152,24 @@ namespace Kontur.ImageTransformer
 
             StatusCode Code = new StatusCode(HttpStatusCode.OK, false);
             Bitmap result = null;
+            string Debug_result = "";
+
             try
             {
-                if (DateTime.Now.Ticks - time > 8000000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
+                //if (DateTime.Now.Ticks - time > 8000000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
                 if (listenerContext.Request.HttpMethod != "POST") { throw new StatusCode(HttpStatusCode.BadRequest, true); }
                 if (listenerContext.Request.ContentLength64 > 102400) { throw new StatusCode(HttpStatusCode.BadRequest, true); }
                 string method;
                 int[] digits = new int[4];
-                int param = 0;
-                ParseURL(listenerContext.Request.RawUrl, out method, ref digits, ref param);
-                if (DateTime.Now.Ticks - time > 8500000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
+                ParseURL(listenerContext.Request.RawUrl, out method, ref digits);
+                //if (DateTime.Now.Ticks - time > 8500000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
                 using (Bitmap b = new Bitmap(listenerContext.Request.InputStream)) {
-                    if (DateTime.Now.Ticks - time > 9000000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
-                    result = CropAndSetFilter(b, GetRectangleFromZero(digits[0], digits[1], digits[2], digits[3], b), GetFilter(method), param);
-                    if (DateTime.Now.Ticks - time > 9500000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
+                    if (b.Height * b.Width > 1000000) { throw new StatusCode(HttpStatusCode.BadRequest, true); }
+                    //if (DateTime.Now.Ticks - time > 9000000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
+                    //result = CropAndSetFilter(b, GetRectangleFromZero(digits[0], digits[1], digits[2], digits[3], b), GetFilter(method));
+                    GetFilter(method).GetRectBeforeTransform(ref digits[0], ref digits[1], ref digits[2], ref digits[3], b);
+                    Debug_result = "{x="+digits[0]+"; y="+digits[1]+"; w="+digits[2]+"; h="+digits[3]+"}";
+                    //if (DateTime.Now.Ticks - time > 9500000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
                 }
             }
             catch (StatusCode code)
@@ -177,8 +182,10 @@ namespace Kontur.ImageTransformer
             }
             else
             {
-                listenerContext.Response.ContentType = "image/png";
-                result.Save(listenerContext.Response.OutputStream, System.Drawing.Imaging.ImageFormat.Png);
+                //listenerContext.Response.ContentType = "image/png";
+                //result.Save(listenerContext.Response.OutputStream, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] res = Encoding.UTF8.GetBytes(Debug_result);
+                listenerContext.Response.OutputStream.Write(res, 0, res.Length);
                 listenerContext.Response.OutputStream.Dispose();
             }
 
@@ -187,7 +194,7 @@ namespace Kontur.ImageTransformer
             }
         }
 
-        private ABSFilter GetFilter(string name) {
+        private ABSTransform GetFilter(string name) {
             try {
                 return Filters[name];
             }
@@ -196,19 +203,11 @@ namespace Kontur.ImageTransformer
             }
         }
 
-        private void ParseURL(string URL, out string method, ref int[] selection, ref int param)
+        private void ParseURL(string URL, out string method, ref int[] selection)
         {
             Match m = request_parser.Match(URL);
             if (!m.Success) { throw new StatusCode(HttpStatusCode.BadRequest, true); }
             method = m.Groups["method"].Value;
-            int sk = method.IndexOf('(');
-            if (sk != -1) {
-                try { 
-                    param = Convert.ToInt32(method.Substring(sk+1, method.Length-sk - 2));
-                }
-                catch (Exception err) { throw new StatusCode(HttpStatusCode.BadRequest, true); }
-                method = method.Substring(0,sk);
-            }
             string[] digits = Regex.Split(m.Groups["rectangle"].Value, ",");
             for (int i = 0; i < selection.Length; i++)
             {
@@ -244,38 +243,38 @@ namespace Kontur.ImageTransformer
             return new Rectangle(new_x, new_y, new_w, new_h);
         }
 
-        public unsafe Bitmap CropAndSetFilter(Bitmap png, Rectangle selection, ABSFilter Filter, int param)
-        {
-            Bitmap result = new Bitmap(selection.Width, selection.Height, PixelFormat.Format32bppArgb);
-            BitmapData bd_new = result.LockBits(new Rectangle(0, 0, result.Width, result.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-            BitmapData bd_old = png.LockBits(new Rectangle(0, 0, png.Width, png.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
-            try
-            {
-                byte* curpos;
-                byte* new_pos;
+        //public unsafe Bitmap CropAndSetFilter(Bitmap png, Rectangle selection, ABSTransform Filter)
+        //{
+        //    Bitmap result = new Bitmap(selection.Width, selection.Height, PixelFormat.Format32bppArgb);
+        //    BitmapData bd_new = result.LockBits(new Rectangle(0, 0, result.Width, result.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+        //    BitmapData bd_old = png.LockBits(new Rectangle(0, 0, png.Width, png.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+        //    try
+        //    {
+        //        byte* curpos;
+        //        byte* new_pos;
 
-                byte* a, r, g, b;
-                for (int h = selection.Y; h < selection.Height+selection.Y; h++)
-                {
-                    curpos = ((byte*)bd_old.Scan0) + (h * bd_old.Stride) + (selection.X*4);
-                    new_pos = ((byte*)bd_new.Scan0) + ((h - selection.Y) * bd_new.Stride);
-                    for (int w = 0; w < selection.Width; w++)
-                    {
-                        *new_pos = *curpos; b = new_pos; new_pos++; curpos++;
-                        *new_pos = *curpos; g = new_pos; new_pos++; curpos++;
-                        *new_pos = *curpos; r = new_pos; new_pos++; curpos++;
-                        *new_pos = *curpos; a = new_pos; new_pos++; curpos++;
+        //        byte* a, r, g, b;
+        //        for (int h = selection.Y; h < selection.Height+selection.Y; h++)
+        //        {
+        //            curpos = ((byte*)bd_old.Scan0) + (h * bd_old.Stride) + (selection.X*4);
+        //            new_pos = ((byte*)bd_new.Scan0) + ((h - selection.Y) * bd_new.Stride);
+        //            for (int w = 0; w < selection.Width; w++)
+        //            {
+        //                *new_pos = *curpos; b = new_pos; new_pos++; curpos++;
+        //                *new_pos = *curpos; g = new_pos; new_pos++; curpos++;
+        //                *new_pos = *curpos; r = new_pos; new_pos++; curpos++;
+        //                *new_pos = *curpos; a = new_pos; new_pos++; curpos++;
 
-                        Filter.SetColor(ref *a, ref *r, ref *g, ref *b, param);
-                    }
-                }
-            }
-            finally {
-                png.UnlockBits(bd_old);
-                png.Dispose();
-                result.UnlockBits(bd_new);
-            }
-            return result;
-        }
+        //                Filter.SetColor(ref *a, ref *r, ref *g, ref *b);
+        //            }
+        //        }
+        //    }
+        //    finally {
+        //        png.UnlockBits(bd_old);
+        //        png.Dispose();
+        //        result.UnlockBits(bd_new);
+        //    }
+        //    return result;
+        //}
     }
 }

@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/QAPage">
+
+    <head>
+
+        <title>c# - Как повернуть матрицу на 90 градусов с разной размерность? - Stack Overflow на русском</title>
+        <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/ru/img/favicon.ico?v=b95a7516ec95">
+        <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/ru/img/apple-touch-icon.png?v=0dd80f442adc">
+        <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow на русском" href="/opensearch.xml">
+
+
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://ru.stackoverflow.com/questions/699039/Как-повернуть-матрицу-на-90-градусов-с-разной-размерность"/>
+        <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/ru/img/apple-touch-icon@2.png?v=387ab71bdafd" />
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:domain" content="ru.stackoverflow.com"/>
+        <meta name="twitter:title" property="og:title" itemprop="title name" content="Как повернуть матрицу на 90 градусов с разной размерность?" />
+        <meta name="twitter:description" property="og:description" itemprop="description" content="Никак не могу сообразить как повернуть матрицу с разной размерностью
+
+Пытался вот так, но при смене ширины или высоты, все ломается
+
+newMatrix = new bool[h, w];
+for (int i = 0; i &amp;lt; w; i++)
+     ..." />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdn.sstatic.net/Js/stub.ru.js?v=081b9ac590f3"></script>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Shared/stacks.css?v=1701303ff37d">
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Sites/ru/primary.css?v=affa371e8f82">
+    
+            <link rel="alternate" type="application/atom+xml" title="Лента для вопроса &#171;Как повернуть матрицу на 90 градусов с разной размерность?&#187;" href="/feeds/question/699039">
+            <meta name="twitter:app:country" content="US" />
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS" />
+            <meta name="twitter:app:id:iphone" content="871299723" />
+            <meta name="twitter:app:url:iphone" content="se-zaphod://ru.stackoverflow.com/questions/699039/%D0%9A%D0%B0%D0%BA-%D0%BF%D0%BE%D0%B2%D0%B5%D1%80%D0%BD%D1%83%D1%82%D1%8C-%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D1%83-%D0%BD%D0%B0-90-%D0%B3%D1%80%D0%B0%D0%B4%D1%83%D1%81%D0%BE%D0%B2-%D1%81-%D1%80%D0%B0%D0%B7%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%80%D0%BD%D0%BE%D1%81%D1%82%D1%8C" />
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS" />
+            <meta name="twitter:app:id:ipad" content="871299723" />
+            <meta name="twitter:app:url:ipad" content="se-zaphod://ru.stackoverflow.com/questions/699039/%D0%9A%D0%B0%D0%BA-%D0%BF%D0%BE%D0%B2%D0%B5%D1%80%D0%BD%D1%83%D1%82%D1%8C-%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D1%83-%D0%BD%D0%B0-90-%D0%B3%D1%80%D0%B0%D0%B4%D1%83%D1%81%D0%BE%D0%B2-%D1%81-%D1%80%D0%B0%D0%B7%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%80%D0%BD%D0%BE%D1%81%D1%82%D1%8C" />
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://ru.stackoverflow.com/questions/699039/%D0%9A%D0%B0%D0%BA-%D0%BF%D0%BE%D0%B2%D0%B5%D1%80%D0%BD%D1%83%D1%82%D1%8C-%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D1%83-%D0%BD%D0%B0-90-%D0%B3%D1%80%D0%B0%D0%B4%D1%83%D1%81%D0%BE%D0%B2-%D1%81-%D1%80%D0%B0%D0%B7%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%80%D0%BD%D0%BE%D1%81%D1%82%D1%8C">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+
+            StackExchange.ready(function () {
+                                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:6,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:699039});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('609', '699039');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text'); });
+
+            });
+        </script>
+
+        
+        
+        
+        
+             
+        
+                <script>
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToReputationNotifications('609');
+                StackExchange.realtime.subscribeToTopBarNotifications('609');
+        });
+    </script>
+    <script>
+        StackExchange.init({"locale":"ru","serverTime":1519109072,"routeName":"Questions/Show","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","site":{"name":"Stack Overflow на русском","description":"Вопросы и ответы для программистов","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","recaptchaAudioLang":"en","enableNewTagCreationWarning":false,"insertSpaceAfterNameTabCompletion":false,"id":609,"childUrl":"https://ru.meta.stackoverflow.com","enableSocialMediaInSharePopup":true,"protocol":"https"},"user":{"fkey":"46df54b013b3c520df4cd581c22c332a","tid":"b3d46ac3-e663-7dfd-4474-85b2baebaa8e","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true,"canSeeNewHeaderDesign":true},"realtime":{"newest":true,"active":true,"tagged":true,"staleDisconnectIntervalInHours":0,"workerIframeDomain":"https://cdn.sstatic.net"},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300},"jobPreferences":{"maxNumDeveloperRoles":2,"maxNumIndustries":4}}, {"site":{"allowImageUploads":true,"commentHighlightingWithCSS":true,"enableUserHovercards":true,"styleCode":true,"enableImgurHttps":true,"forceHttpsImages":true},"comments":{},"userProfile":{},"tags":{"allowNonAsciiTags":true},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"topBar":{},"snippets":{"snippetsEnabled":true,"renderDomain":"stacksnippets.net"},"paths":{},"markdown":{"asteriskIntraWordEmphasis":true},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000},"slack":{"sidebarAdDismissCookie":"slack-sidebar-ad"},"subscriptions":{}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.ru.js":"e7604777d41c","js/moderator.ru.js":"7cc9a45abed7","js/full-anon.ru.js":"7b20bbbf6b53","js/full.ru.js":"927af1916cb2","js/wmd.ru.js":"d12920a3991e","js/third-party/jquery.autocomplete.min.js":"d3b8fa7fdf74","js/third-party/jquery.autocomplete.min.ru.js":"","js/mobile.ru.js":"5fe120b9395a","js/help.ru.js":"83be4e9c92b1","js/tageditor.ru.js":"4bc6cadf38d3","js/tageditornew.ru.js":"03191227ad59","js/inline-tag-editing.ru.js":"e264472c575d","js/revisions.ru.js":"e6747550a979","js/review.ru.js":"3a1f9605ada3","js/tagsuggestions.ru.js":"104b4a8c45cb","js/post-validation.ru.js":"84e1cb81e241","js/explore-qlist.ru.js":"c551cd4a04de","js/events.ru.js":"04e5e67a36fa","js/keyboard-shortcuts.ru.js":"b7501d34ab79","js/external-editor.ru.js":"622ad2d5cd2d","js/adops.ru.js":"9a6a7812a212","js/external-editor.ru.js":"622ad2d5cd2d","js/snippet-javascript.ru.js":"dee20864ae81","js/snippet-javascript-codemirror.ru.js":"71c7ee901f0f"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    <noscript id="noscript-css"><style>body,.top-bar{margin-top:1.9em}</style></noscript>
+    </head>
+    <body class="question-page new-topbar">
+
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+
+
+<header class="top-bar js-top-bar _fixed">
+    <div class="-container">
+        <div class="-main">
+            
+                <a href="https://ru.stackoverflow.com" class="-logo js-gps-track"
+                   data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+                    <span class="-img">Stack Overflow на русском</span>
+                </a>
+
+
+                <nav class="navigation" role="navigation" aria-label="навигация по сайту">
+                    <ol class="-list">
+        <li class="-item _current">
+            <a id="nav-questions" href="/questions" class="-link js-gps-track"
+               data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">Вопросы</a>
+        </li>
+        <li class="-item">
+            <a id="nav-tags" href="/tags" class="-link js-gps-track"
+               data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">Метки</a>
+        </li>
+        <li class="-item">
+            <a id="nav-users" href="/users" class="-link js-gps-track"
+               data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">Участники</a>
+        </li>
+                    </ol>
+                </nav>
+
+        </div>
+
+            <form id="search" action="/search" method="get" class="searchbar" autocomplete="off" role="search">
+                    <input name="q" type="text" placeholder="Поиск..." value="" tabindex="1" autocomplete="off" maxlength="240" class="f-input js-search-field" />
+                    <button type="submit" aria-label="Поиск…" class="btn-topbar-primary js-search-submit"><svg aria-hidden="true" class="svg-icon iconSearch" width="18" height="18" viewBox="0 0 18 18"><path d="M12.86 11.32L18 16.5 16.5 18l-5.18-5.14v-.35a7 7 0 1 1 1.19-1.19h.35zM7 12A5 5 0 1 0 7 2a5 5 0 0 0 0 10z"/></svg></button>
+            </form>
+
+        
+
+
+    
+
+<div class="-actions">
+    <nav class="secondary-nav">
+        <div class="-dialog-container js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="https://ru.stackoverflow.com">текущее сообщество</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li>
+                            <div class="related-links">
+            <a href="https://ru.stackoverflow.com/help" class="js-gps-track"     data-gps-track="site_switcher.click({ item_type:14 })"
+>справка</a>
+                    <a href="https://chat.stackexchange.com?tab=site&amp;host=ru.stackoverflow.com" class="js-gps-track"     data-gps-track="site_switcher.click({ item_type:6 })"
+>чат</a>
+            </div>
+    <a href="https://ru.stackoverflow.com"
+       class="current-site-link site-link js-gps-track"
+       data-id="609"
+       data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="favicon favicon-ru site-icon" title="Stack Overflow на русском"></div>
+        Stack Overflow на русском
+    </a>
+
+                    </li>
+                    <li class="related-site">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                            <a href="https://ru.meta.stackoverflow.com"
+       class="site-link js-gps-track"
+       data-id="610"
+       data-gps-track="site.switch({ target_site:610, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="favicon favicon-rumeta site-icon" title="Stack Overflow на русском Meta"></div>
+        Stack Overflow на русском Meta
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+Ваши сообщества            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+Чтобы изменить список, <a href="https://ru.stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fru.stackoverflow.com%2fquestions%2f699039%2f%25d0%259a%25d0%25b0%25d0%25ba-%25d0%25bf%25d0%25be%25d0%25b2%25d0%25b5%25d1%2580%25d0%25bd%25d1%2583%25d1%2582%25d1%258c-%25d0%25bc%25d0%25b0%25d1%2582%25d1%2580%25d0%25b8%25d1%2586%25d1%2583-%25d0%25bd%25d0%25b0-90-%25d0%25b3%25d1%2580%25d0%25b0%25d0%25b4%25d1%2583%25d1%2581%25d0%25be%25d0%25b2-%25d1%2581-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bd%25d0%25be%25d0%25b9-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bc%25d0%25b5%25d1%2580%25d0%25bd%25d0%25be%25d1%2581%25d1%2582%25d1%258c" class="login-link js-gps-track"     data-gps-track="site_switcher.click({ item_type:10 })"
+>зарегистрируйтесь</a> или <a href="https://ru.stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fru.stackoverflow.com%2fquestions%2f699039%2f%25d0%259a%25d0%25b0%25d0%25ba-%25d0%25bf%25d0%25be%25d0%25b2%25d0%25b5%25d1%2580%25d0%25bd%25d1%2583%25d1%2582%25d1%258c-%25d0%25bc%25d0%25b0%25d1%2582%25d1%2580%25d0%25b8%25d1%2586%25d1%2583-%25d0%25bd%25d0%25b0-90-%25d0%25b3%25d1%2580%25d0%25b0%25d0%25b4%25d1%2583%25d1%2581%25d0%25be%25d0%25b2-%25d1%2581-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bd%25d0%25be%25d0%25b9-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bc%25d0%25b5%25d1%2580%25d0%25bd%25d0%25be%25d1%2581%25d1%2582%25d1%258c" class="login-link js-gps-track"     data-gps-track="site_switcher.click({ item_type:11 })"
+>войдите</a>.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">другие сообщества stack exchange</a>
+            </h3>
+            <a href="https://stackoverflow.blog" class="fr">блог компании</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+                <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Тур
+                            <span class="item-summary">
+                                Начните с этой страницы, чтобы быстро ознакомиться с сайтом
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Справка
+                        <span class="item-summary">
+                            Подробные ответы на любые возможные вопросы
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://ru.meta.stackoverflow.com" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Мета
+                                <span class="item-summary">
+                                    Обсудить принципы работы и политику сайта
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                О нас
+                                <span class="item-summary">
+                                    Узнать больше о компании Stack Overflow
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Бизнес
+                                <span class="item-summary">
+                                    Узнать больше о поиске разработчиков или рекламе на сайте
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+        </div>
+        <ol class="-list">
+    <li class="-item">
+        <a href="https://stackexchange.com/users/?tab=inbox" class="-link js-inbox-button" title="Последние входящие сообщения">
+            <svg aria-hidden="true" class="svg-icon iconInbox" width="20" height="18" viewBox="0 0 20 18"><path d="M15.19 1H4.63c-.85 0-1.6.54-1.85 1.35L0 10.79V15c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2v-4.21l-2.87-8.44A2 2 0 0 0 15.19 1zm-.28 10l-2 2h-6l-2-2H1.96L4.4 3.68A1 1 0 0 1 5.35 3h9.12a1 1 0 0 1 .95.68L17.86 11h-2.95z"/></svg>
+            <span class="indicator-badge js-unread-count _important" style="display: none;"></span>
+        </a>
+    </li>
+    <li class="-item">
+        <a href="https://stackexchange.com/users/?tab=reputation" class="-link js-achievements-button" title="Последние достижения: репутация, знаки и привилегии" data-unread-class="_highlighted-positive">
+            <svg aria-hidden="true" class="svg-icon iconAchievements" width="18" height="18" viewBox="0 0 18 18"><path d="M15 2V1H3v1H0v4c0 1.6 1.4 3 3 3v1c.4 1.5 3 2.6 5 3v2H5s-1 1.5-1 2h10c0-.4-1-2-1-2h-3v-2c2-.4 4.6-1.5 5-3V9c1.6-.2 3-1.4 3-3V2h-3zM3 7c-.5 0-1-.5-1-1V4h1v3zm8.4 2.5L9 8 6.6 9.4l1-2.7L5 5h3l1-2.7L10 5h2.8l-2.3 1.8 1 2.7h-.1zM16 6c0 .5-.5 1-1 1V4h1v2z"/></svg>
+            <span class="indicator-badge js-unread-count _positive" style="display: none;"></span>
+        </a>
+    </li>
+
+    <li class="-item"><a href="#" class="-link js-help-button" title="Справка и прочие ресурсы">
+        <svg aria-hidden="true" class="svg-icon iconHelp" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1a8 8 0 1 0 0 16A8 8 0 0 0 9 1zm.81 12.13c-.02.71-.55 1.15-1.24 1.13-.66-.02-1.17-.49-1.15-1.2.02-.72.56-1.18 1.22-1.16.7.03 1.2.51 1.17 1.23zM11.77 8a5.8 5.8 0 0 1-1.02.91l-.53.37c-.26.2-.42.43-.5.69a4 4 0 0 0-.09.75c0 .05-.03.16-.18.16H7.88c-.16 0-.18-.1-.18-.15.03-.66.12-1.21.4-1.66a5.29 5.29 0 0 1 1.43-1.22c.16-.12.28-.25.38-.39a1.34 1.34 0 0 0 .02-1.71c-.24-.31-.51-.46-1.03-.46-.51 0-.8.26-1.02.6-.21.33-.18.73-.18 1.1H5.75c0-1.38.35-2.25 1.1-2.76.52-.35 1.17-.5 1.93-.5 1 0 1.79.18 2.49.71.64.5.98 1.18.98 2.12 0 .57-.2 1.05-.48 1.44z"/></svg>
+    </a></li>
+
+    <li class="-item">
+        <a href="https://stackexchange.com" class="-link js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="Список всех сайтов Stack Exchange (172 сайта)">
+            <svg aria-hidden="true" class="svg-icon iconStackExchange" width="18" height="18" viewBox="0 0 18 18"><path d="M1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2zM15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2zM1 6h16v4H1V6z"/></svg>
+        </a>
+    </li>
+        </ol>
+    </nav>
+            <div class="-ctas">
+                        <a href="https://ru.stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fru.stackoverflow.com%2fquestions%2f699039%2f%25d0%259a%25d0%25b0%25d0%25ba-%25d0%25bf%25d0%25be%25d0%25b2%25d0%25b5%25d1%2580%25d0%25bd%25d1%2583%25d1%2582%25d1%258c-%25d0%25bc%25d0%25b0%25d1%2582%25d1%2580%25d0%25b8%25d1%2586%25d1%2583-%25d0%25bd%25d0%25b0-90-%25d0%25b3%25d1%2580%25d0%25b0%25d0%25b4%25d1%2583%25d1%2581%25d0%25be%25d0%25b2-%25d1%2581-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bd%25d0%25be%25d0%25b9-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bc%25d0%25b5%25d1%2580%25d0%25bd%25d0%25be%25d1%2581%25d1%2582%25d1%258c" class="login-link btn-clear" rel="nofollow">Войти</a>
+                        <a href="https://ru.stackoverflow.com/users/signup?ssrc=head&returnurl=https%3a%2f%2fru.stackoverflow.com%2fquestions%2f699039%2f%25d0%259a%25d0%25b0%25d0%25ba-%25d0%25bf%25d0%25be%25d0%25b2%25d0%25b5%25d1%2580%25d0%25bd%25d1%2583%25d1%2582%25d1%258c-%25d0%25bc%25d0%25b0%25d1%2582%25d1%2580%25d0%25b8%25d1%2586%25d1%2583-%25d0%25bd%25d0%25b0-90-%25d0%25b3%25d1%2580%25d0%25b0%25d0%25b4%25d1%2583%25d1%2581%25d0%25be%25d0%25b2-%25d1%2581-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bd%25d0%25be%25d0%25b9-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bc%25d0%25b5%25d1%2580%25d0%25bd%25d0%25be%25d1%2581%25d1%2582%25d1%258c" class="login-link btn-topbar-primary" rel="nofollow" data-ga="[&quot;Sign Up&quot;,&quot;Sign Up Navigation&quot;,&quot;Header&quot;,null,null]">Регистрация</a>
+
+            </div>
+</div>
+
+    </div>
+</header>
+
+    <script>
+        StackExchange.ready(function() { StackExchange.topbar.init(); });
+        StackExchange.scrollPadding.setPaddingTop(60, 10);     </script>
+
+
+    <div class="container  ">
+        
+
+
+        <div id="content" class="snippet-hidden">
+
+
+            
+
+<div itemscope itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/ru/img/apple-touch-icon.png?v=0dd80f442adc">
+
+
+<div id="herobox" class="js-dismissable-hero" data-campaign-name="nso">
+    <div id="hero-content">
+            <div id="close"><a title="свернуть">_</a></div>
+        <div id="blurb">
+            &#171;Stack Overflow на русском&#187; — сайт вопросов и ответов для программистов. Присоединяйтесь! 
+Это не займёт больше минуты:
+            <br />
+            <br />
+            <a href="/users/signup?ssrc=hero&amp;returnurl=https%3a%2f%2fru.stackoverflow.com%2fquestions%2f699039%2f%25d0%259a%25d0%25b0%25d0%25ba-%25d0%25bf%25d0%25be%25d0%25b2%25d0%25b5%25d1%2580%25d0%25bd%25d1%2583%25d1%2582%25d1%258c-%25d0%25bc%25d0%25b0%25d1%2582%25d1%2580%25d0%25b8%25d1%2586%25d1%2583-%25d0%25bd%25d0%25b0-90-%25d0%25b3%25d1%2580%25d0%25b0%25d0%25b4%25d1%2583%25d1%2581%25d0%25be%25d0%25b2-%25d1%2581-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bd%25d0%25be%25d0%25b9-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bc%25d0%25b5%25d1%2580%25d0%25bd%25d0%25be%25d1%2581%25d1%2582%25d1%258c" id="tell-me-more" class="button">Регистрация</a>
+        </div>
+        <div id="desc">
+            <b>Вот как это работает:</b>
+            <ol id="hiw">
+                <li id="q">
+                    Любой может задать вопрос
+                </li>
+                <li id="an">
+                    Любой может ответить
+                </li>
+                <li id="b">
+                    Лучшие ответы получают голоса и поднимаются наверх
+                </li>
+            </ol>
+        </div>
+    <div style="clear: both"></div>
+    </div>
+</div><script>
+    StackExchange.ready(function () {
+
+        StackExchange.Hero.init("nso", "a");
+
+        var location = 0;
+        if ($("body").hasClass("questions-page")) {
+            location = 1;
+        } else if ($("body").hasClass("question-page")) {
+            location = 1;
+        } else if ($("body").hasClass("faq-page")) {
+            location = 5;
+        } else if ($("body").hasClass("home-page")) {
+            location = 3;
+        }
+
+        $('#tell-me-more').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+            });
+        });
+
+        $('.js-dismissable-hero #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+              });
+
+            StackExchange.Hero.dismiss();
+
+            $.ajax({
+                url: "/hero-mini",
+                success: function (data) {
+                    $(".js-dismissable-hero").fadeOut("fast", function () {
+                        $(".js-dismissable-hero").replaceWith(data);
+                        $("#herobox-mini").fadeIn("fast");
+                    });
+                }
+            });
+            return false;
+        });
+    });
+</script>    <div class="inner-content clearfix">
+            <div id="question-header">
+                <h1 itemprop="name"><a href="/questions/699039/%d0%9a%d0%b0%d0%ba-%d0%bf%d0%be%d0%b2%d0%b5%d1%80%d0%bd%d1%83%d1%82%d1%8c-%d0%bc%d0%b0%d1%82%d1%80%d0%b8%d1%86%d1%83-%d0%bd%d0%b0-90-%d0%b3%d1%80%d0%b0%d0%b4%d1%83%d1%81%d0%be%d0%b2-%d1%81-%d1%80%d0%b0%d0%b7%d0%bd%d0%be%d0%b9-%d1%80%d0%b0%d0%b7%d0%bc%d0%b5%d1%80%d0%bd%d0%be%d1%81%d1%82%d1%8c" class="question-hyperlink">Как повернуть матрицу на 90 градусов с разной размерность?</a></h1>
+
+            
+<div class="aside-cta" role="navigation" aria-label="задать новый вопрос">
+        <a href="/questions/ask" class="btn-outlined">Задать вопрос</a>
+</div>
+
+        </div>
+            <div id="mainbar" role="main" aria-label="question and answers">
+
+            
+
+<div class="question" data-questionid="699039"  id="question">
+
+    <div id="dfp-tlb" class="everyonelovesstackoverflow"></div>    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="699039">
+        <a class="vote-up-off" title="Вопрос отражает стремление разобраться; он понятен и несёт пользу">голос &#171;за&#187;</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="Вопрос не отражает стремления разобраться; он непонятен или не несёт пользы">голос &#171;против&#187;</a>
+
+        <a class="star-off" href="#">избранное</a>
+        <div class="favoritecount"><b></b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>Никак не могу сообразить как повернуть матрицу с разной размерностью</p>
+
+<p>Пытался вот так, но при смене ширины или высоты, все ломается</p>
+
+<pre><code>newMatrix = new bool[h, w];
+for (int i = 0; i &lt; w; i++)
+        {
+            for (int j = 0; j &lt; h; j++)
+            {
+                newMatrix [h - 1 - j, i] = oldMatrix[i, j];
+            }
+        }
+</code></pre>
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/c%23" class="post-tag" title="показать вопросы с меткой [c#]" rel="tag">c#</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/q/699039" title="короткая постоянная ссылка на этот вопрос" class="short-link" id="link-post-699039">поделиться</a><span class="lsep">|</span><a href="/posts/699039/edit" class="suggest-edit-post" title="">улучшить этот вопрос</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="/posts/699039/revisions" title="показать все правки данного сообщения">изменён <span title="2017-07-28 14:35:17Z" class="relativetime">28 июл '17 в 14:35</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        задан <span title="2017-07-28 14:04:55Z" class="relativetime">28 июл '17 в 14:04</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/237487/%d0%90%d1%80%d1%82%d1%83%d1%80"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/9baefea09c6e080076103e4680afd2d0?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/237487/%d0%90%d1%80%d1%82%d1%83%d1%80">Артур</a>
+        <div class="-flair">
+            <span class="reputation-score" title="уровень репутации " dir="ltr">100</span><span title="11 бронзовых знаков"><span class="badge3"></span><span class="badgecount">11</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+                
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-699039" class="comments js-comments-container ">
+                <ul class="comments-list js-comments-list"
+                        data-remaining-comments-count="1"
+                        data-canpost="false"
+                        data-cansee="true"
+                        data-comments-unavailable="false"
+                        data-addlink-disabled="true">
+
+
+
+    <li id="comment-1036658" class="comment js-comment " data-comment-id="1036658">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">если бы она была квадратной, то смоглы бы. инасче надо создавать новую матрицу</span>
+                    &ndash;&nbsp;<a href="/users/199793/lex-hobbit"
+                       title="3,700 баллов репутации"
+                       class="comment-user">Lex Hobbit</a>
+                <span class="comment-date" dir="ltr"><span title="2017-07-28 14:31:23Z" class="relativetime-clean">28 июл '17 в 14:31</span></span>
+                        <span class="edited-yes" title="комментарий был изменён 1 раз"></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-1036704" class="comment js-comment " data-comment-id="1036704">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">У вас нормальный алгоритм вроде, что конкретно ломается?</span>
+                    &ndash;&nbsp;<a href="/users/218063/%d0%90%d0%bd%d0%b4%d1%80%d0%b5%d0%b9-nop"
+                       title="11,551 балл репутации"
+                       class="comment-user">Андрей NOP</a>
+                <span class="comment-date" dir="ltr"><span title="2017-07-28 14:59:10Z" class="relativetime-clean">28 июл '17 в 14:59</span></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-1036708" class="comment js-comment " data-comment-id="1036708">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">ошибка выхода за рамки массива. Все хорошо работает только для квадратных матриц</span>
+                    &ndash;&nbsp;<a href="/users/237487/%d0%90%d1%80%d1%82%d1%83%d1%80"
+                       title="100 баллов репутации"
+                       class="comment-user owner">Артур</a>
+                <span class="comment-date" dir="ltr"><span title="2017-07-28 15:01:03Z" class="relativetime-clean">28 июл '17 в 15:01</span></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-1036715" class="comment js-comment " data-comment-id="1036715">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">тут либо искусственно делать ее квадратной, либо создавать новую. советую 2 вариант</span>
+                    &ndash;&nbsp;<a href="/users/243367/alexandr"
+                       title="300 баллов репутации"
+                       class="comment-user">Alexandr</a>
+                <span class="comment-date" dir="ltr"><span title="2017-07-28 15:09:37Z" class="relativetime-clean">28 июл '17 в 15:09</span></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-1036746" class="comment js-comment " data-comment-id="1036746">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Приведите весь код. По приведенному фрагменту проблем с <code>newMatrix</code> не видно. Покажите как создаете <code>oldMatrix</code></span>
+                    &ndash;&nbsp;<a href="/users/218063/%d0%90%d0%bd%d0%b4%d1%80%d0%b5%d0%b9-nop"
+                       title="11,551 балл репутации"
+                       class="comment-user">Андрей NOP</a>
+                <span class="comment-date" dir="ltr"><span title="2017-07-28 15:41:43Z" class="relativetime-clean">28 июл '17 в 15:41</span></span>
+                                                                            </div>
+        </div>
+    </li>
+                </ul>
+				<div class="comment-form">
+					<form id="add-comment-699039" 
+							class="" 
+							data-placeholdertext="Используйте комментарии для запроса дополнительной информации или предложения улучшений. Избегайте публикации ответа на вопросы в комментариях."></form>
+				</div>            
+	    </div>
+
+        <div id="comments-link-699039" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link  dno"
+                   title="Используйте комментарии для запроса дополнительной информации или предложения улучшений. Избегайте публикации ответа на вопросы в комментариях."
+                   ></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="разверните, чтобы увидеть все комментарии к сообщению" href=# onclick="">показать ещё <b>1</b> комментарий</a>
+        </div>         
+    </td>
+</tr>        </table>
+</div>
+
+            <div id="answers">
+
+                <a name="tab-top"></a>
+                <div id="answers-header">
+                    <div class="subheader answers-subheader">
+                        <h2 data-answercount="2">
+                                2 ответа
+                                <span style="display:none;" itemprop="answerCount">2</span>
+                        </h2>
+                        <div>
+                            
+<div id="tabs">
+        <a href="/questions/699039/%d0%9a%d0%b0%d0%ba-%d0%bf%d0%be%d0%b2%d0%b5%d1%80%d0%bd%d1%83%d1%82%d1%8c-%d0%bc%d0%b0%d1%82%d1%80%d0%b8%d1%86%d1%83-%d0%bd%d0%b0-90-%d0%b3%d1%80%d0%b0%d0%b4%d1%83%d1%81%d0%be%d0%b2-%d1%81-%d1%80%d0%b0%d0%b7%d0%bd%d0%be%d0%b9-%d1%80%d0%b0%d0%b7%d0%bc%d0%b5%d1%80%d0%bd%d0%be%d1%81%d1%82%d1%8c?answertab=active#tab-top" data-nav-xhref="" title="Сначала недавно обновлённые ответы" data-value="active" data-shortcut="A">
+            текущие</a>
+        <a href="/questions/699039/%d0%9a%d0%b0%d0%ba-%d0%bf%d0%be%d0%b2%d0%b5%d1%80%d0%bd%d1%83%d1%82%d1%8c-%d0%bc%d0%b0%d1%82%d1%80%d0%b8%d1%86%d1%83-%d0%bd%d0%b0-90-%d0%b3%d1%80%d0%b0%d0%b4%d1%83%d1%81%d0%be%d0%b2-%d1%81-%d1%80%d0%b0%d0%b7%d0%bd%d0%be%d0%b9-%d1%80%d0%b0%d0%b7%d0%bc%d0%b5%d1%80%d0%bd%d0%be%d1%81%d1%82%d1%8c?answertab=oldest#tab-top" data-nav-xhref="" title="Ответы отображаются в порядке их публикации" data-value="oldest" data-shortcut="O">
+            старые</a>
+        <a class="youarehere " href="/questions/699039/%d0%9a%d0%b0%d0%ba-%d0%bf%d0%be%d0%b2%d0%b5%d1%80%d0%bd%d1%83%d1%82%d1%8c-%d0%bc%d0%b0%d1%82%d1%80%d0%b8%d1%86%d1%83-%d0%bd%d0%b0-90-%d0%b3%d1%80%d0%b0%d0%b4%d1%83%d1%81%d0%be%d0%b2-%d1%81-%d1%80%d0%b0%d0%b7%d0%bd%d0%be%d0%b9-%d1%80%d0%b0%d0%b7%d0%bc%d0%b5%d1%80%d0%bd%d0%be%d1%81%d1%82%d1%8c?answertab=votes#tab-top" data-nav-xhref="" title="Сначала ответы с наивысшим рейтингом" data-value="votes" data-shortcut="V">
+            голоса</a>
+    </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+  
+<a name="699169"></a>
+<div id="answer-699169" class="answer accepted-answer" data-answerid="699169"  itemscope itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="699169">
+        <a class="vote-up-off" title="Ответ полезен">голос &#171;за&#187;</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="Ответ не является полезным">голос &#171;против&#187;</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="загружается, когда ответ был принят…">принят</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Вот вам пример поворота двумерного массива на 90 градусов по и против часовой стрелке  </p>
+
+<pre><code> static void Main(string[] args)
+    {
+        int[,] array = new int[6, 5] {
+                                        { 1,2,3,4 ,5},
+                                        { 5,6,7,8,6 },
+                                        { 9,0,1,2 ,7},
+                                        { 3,4,5,6,8 },
+                                        { 3,4,5,6,8 },
+                                        { 3,4,5,6,8 }
+                                      };         
+        for (int i = 0; i &lt; array.GetLength(0); i++)
+        {
+            for (int k= 0; k &lt; array.GetLength(1); k++)
+            {
+                Console.Write(array[i,k]+ " ");
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine("Rotate Matrix Clockwise");
+        int[,] rotated = RotateMatrixClockwise(array);
+        for (int i = 0; i &lt; rotated.GetLength(0); i++)
+        {
+            for (int k = 0; k &lt; rotated.GetLength(1); k++)
+            {
+                Console.Write(rotated[i, k]+ " ");
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine("Rotate Matrix  AntiClockwise");
+        int[,] rotated1 = RotateMatrixAntiClockwise(array);
+        for (int i = 0; i &lt; rotated1.GetLength(0); i++)
+        {
+            for (int k = 0; k &lt; rotated1.GetLength(1); k++)
+            {
+                Console.Write(rotated1[i, k]+ " ");
+            }
+            Console.WriteLine();
+        }
+    }
+ public static int[,] RotateMatrixClockwise(int[,] oldMatrix)
+    {
+        int[,] newMatrix = new int[oldMatrix.GetLength(1), oldMatrix.GetLength(0)];
+        int newColumn, newRow = 0;
+        for (int oldColumn = oldMatrix.GetLength(1) - 1; oldColumn &gt;= 0; oldColumn--)
+        {
+            newColumn = 0;
+            for (int oldRow = 0; oldRow &lt; oldMatrix.GetLength(0); oldRow++)
+            {
+                newMatrix[newRow, newColumn] = oldMatrix[oldRow, oldColumn];
+                newColumn++;
+            }
+            newRow++;
+        }
+        return newMatrix;
+    }
+    public static int[,] RotateMatrixAntiClockwise(int[,] oldMatrix)
+    {
+        int[,] newMatrix = new int[oldMatrix.GetLength(1), oldMatrix.GetLength(0)];
+        int newColumn, newRow = 0;
+        for (int oldColumn = 0; oldColumn &lt; oldMatrix.GetLength(0) - 1; oldColumn++)
+        {
+            newColumn = 0;
+            for (int oldRow = oldMatrix.GetLength(1) ; oldRow &gt;=0 ; oldRow--)
+            {
+                newMatrix[newRow, newColumn] = oldMatrix[oldRow, oldColumn];
+                newColumn++;
+            }
+            newRow++;
+        }
+        return newMatrix;
+    }
+</code></pre>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/699169" title="короткая постоянная ссылка на этот ответ" class="short-link" id="link-post-699169">поделиться</a><span class="lsep">|</span><a href="/posts/699169/edit" class="suggest-edit-post" title="">улучшить этот ответ</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="/posts/699169/revisions" title="показать все правки данного сообщения">изменён <span title="2017-07-29 10:42:14Z" class="relativetime">29 июл '17 в 10:42</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        ответ дан <span title="2017-07-28 20:15:29Z" class="relativetime">28 июл '17 в 20:15</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/194837/vardan-vardanyan"><div class="gravatar-wrapper-32"><img src="https://lh4.googleusercontent.com/-HU8OVxAOG8E/AAAAAAAAAAI/AAAAAAAAAFI/4vPT3HPsPC4/photo.jpg?sz=32" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/194837/vardan-vardanyan">Vardan Vardanyan</a>
+        <div class="-flair">
+            <span class="reputation-score" title="уровень репутации " dir="ltr">811</span><span title="3 серебряных знака"><span class="badge2"></span><span class="badgecount">3</span></span><span title="22 бронзовых знака"><span class="badge3"></span><span class="badgecount">22</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-699169" class="comments js-comments-container ">
+                <ul class="comments-list js-comments-list"
+                        data-remaining-comments-count="0"
+                        data-canpost="false"
+                        data-cansee="true"
+                        data-comments-unavailable="false"
+                        data-addlink-disabled="true">
+
+
+
+    <li id="comment-1037086" class="comment js-comment " data-comment-id="1037086">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">1) Название ваших методов больше дезориентирует, чем что-то объясняет, например, &quot;counter clockwise&quot; - переводится как &quot;против часовой стрелки&quot;, тогда как перевести ваш метод &quot;counter anti clockwise&quot;?   2) Вынесите вывод массива в отдельный метод, а не 3 раза его повторяйте.  3) Добавите разделить между элементами массива, при выводе на экран. Например, <code>onsole.Write(array[i,k] + &quot; &quot;);</code></span>
+                    &ndash;&nbsp;<a href="/users/180980/jagailo"
+                       title="562 балла репутации"
+                       class="comment-user">Jagailo</a>
+                <span class="comment-date" dir="ltr"><span title="2017-07-29 10:20:56Z" class="relativetime-clean">29 июл '17 в 10:20</span></span>
+                        <span class="edited-yes" title="комментарий был изменён 3 раза"></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-1037090" class="comment js-comment " data-comment-id="1037090">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@Jagailo  я так понял красивый вывод еще важнее логики?</span>
+                    &ndash;&nbsp;<a href="/users/194837/vardan-vardanyan"
+                       title="811 баллов репутации"
+                       class="comment-user">Vardan Vardanyan</a>
+                <span class="comment-date" dir="ltr"><span title="2017-07-29 10:33:06Z" class="relativetime-clean">29 июл '17 в 10:33</span></span>
+                        <span class="edited-yes" title="комментарий был изменён 1 раз"></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-1037096" class="comment js-comment " data-comment-id="1037096">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Красивый - это когда между элементами <code>,</code>, а в конце строчки <code>.</code>. Вывод массива должен быть читабельным, хоть какой-никакой разделитель должен быть. Про логику я ничего не говорил, поворачивает нормально.</span>
+                    &ndash;&nbsp;<a href="/users/180980/jagailo"
+                       title="562 балла репутации"
+                       class="comment-user">Jagailo</a>
+                <span class="comment-date" dir="ltr"><span title="2017-07-29 10:38:17Z" class="relativetime-clean">29 июл '17 в 10:38</span></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-1037098" class="comment js-comment " data-comment-id="1037098">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@Jagailo спасибо за правку но я здесь думал написать правильную логику а не сделать красивый вывод тем более что написанные функции можно употреблять не только в консольных программ но где угодно и там вывод зависит от разработчика кому как нравиться ;) главное увидеть правильный результат</span>
+                    &ndash;&nbsp;<a href="/users/194837/vardan-vardanyan"
+                       title="811 баллов репутации"
+                       class="comment-user">Vardan Vardanyan</a>
+                <span class="comment-date" dir="ltr"><span title="2017-07-29 10:47:48Z" class="relativetime-clean">29 июл '17 в 10:47</span></span>
+                        <span class="edited-yes" title="комментарий был изменён 1 раз"></span>
+                                                                            </div>
+        </div>
+    </li>
+                </ul>
+				<div class="comment-form">
+					<form id="add-comment-699169" 
+							class="" 
+							data-placeholdertext="Используйте комментарии для запроса дополнительной информации или предложения улучшений. Избегайте комментариев в стиле &#171;+1&#187; или &#171;Спасибо&#187;."></form>
+				</div>            
+	    </div>
+
+        <div id="comments-link-699169" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Используйте комментарии для запроса дополнительной информации или предложения улучшений. Избегайте комментариев в стиле &#171;+1&#187; или &#171;Спасибо&#187;."
+                   >добавить комментарий</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="разверните, чтобы увидеть все комментарии к сообщению" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+<div id="dfp-mlb" class="everyonelovesstackoverflow"></div>
+  
+<a name="699327"></a>
+<div id="answer-699327" class="answer" data-answerid="699327"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="699327">
+        <a class="vote-up-off" title="Ответ полезен">голос &#171;за&#187;</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="Ответ не является полезным">голос &#171;против&#187;</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Обычно преобразование структур типа матрицы занимает много ресурсов. Поэтому лучше их не "крутить", а преобразовывать индексы, по которым вы получаете доступ к полям матрицы. Что-то, типа такого:</p>
+
+<pre><code>class Matrix2D
+{
+    public decimal this[uint colIndex, uint rowIndex]
+    {
+        get
+        {
+            _rotateIndex(ref colIndex, ref rowIndex);
+            return _matrix[colIndex, rowIndex];
+        }
+        set
+        {
+            _rotateIndex(ref colIndex, ref rowIndex);
+            _matrix[colIndex, rowIndex] = value;
+        }
+    }
+
+    private void _rotateIndex(ref uint c, ref uint r)
+    {
+        if (c &gt;= Width || r &gt;= Height) throw new ArgumentException("Index out of range");
+
+        uint tmpC = c;
+        uint tmpR = r;
+
+        switch (_rotate)
+        {
+            case 0:
+            default:
+                break;
+            case 1:
+                c = tmpR;
+                r = Width - 1 - tmpC;
+                break;
+            case 2:
+                c = Width - 1 - tmpC;
+                r = Height - 1 - tmpR;
+                break;
+            case 3:
+                c = Height - 1 - tmpR;
+                r = tmpC;
+                break;
+        }
+    }        
+
+    private decimal[,] _matrix;
+    private uint _rotate = 0;
+
+    private Matrix2D() { }
+    public Matrix2D(uint width, uint height)
+    {
+        if (width == 0 || height == 0) throw new ArgumentNullException();
+
+        this.Height = height;
+        this.Width = width;
+
+        _matrix = new decimal[width, height];
+    }
+
+    public uint Height { get; set; }
+    public uint Width { get; set; }
+
+    public void Rotate(uint frac) //угол деленый на 90 градусов
+    {
+        _rotate += frac;
+        _rotate %= 4;
+        if ((frac%2) != 0)
+        {
+            var tmp = Width;
+            Width = Height;
+            Height = tmp;
+        }
+    }
+
+
+}
+</code></pre>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/699327" title="короткая постоянная ссылка на этот ответ" class="short-link" id="link-post-699327">поделиться</a><span class="lsep">|</span><a href="/posts/699327/edit" class="suggest-edit-post" title="">улучшить этот ответ</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        ответ дан <span title="2017-07-29 13:48:33Z" class="relativetime">29 июл '17 в 13:48</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/7200/mirdin"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/1U5mG.png?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/7200/mirdin">Mirdin</a>
+        <div class="-flair">
+            <span class="reputation-score" title="уровень репутации " dir="ltr">5,441</span><span title="1 золотой знак"><span class="badge1"></span><span class="badgecount">1</span></span><span title="14 серебряных знаков"><span class="badge2"></span><span class="badgecount">14</span></span><span title="28 бронзовых знаков"><span class="badge3"></span><span class="badgecount">28</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-699327" class="comments js-comments-container  dno">
+                <ul class="comments-list js-comments-list"
+                        data-remaining-comments-count="0"
+                        data-canpost="false"
+                        data-cansee="true"
+                        data-comments-unavailable="false"
+                        data-addlink-disabled="true">
+
+                </ul>
+				<div class="comment-form">
+					<form id="add-comment-699327" 
+							class="" 
+							data-placeholdertext="Используйте комментарии для запроса дополнительной информации или предложения улучшений. Избегайте комментариев в стиле &#171;+1&#187; или &#171;Спасибо&#187;."></form>
+				</div>            
+	    </div>
+
+        <div id="comments-link-699327" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Используйте комментарии для запроса дополнительной информации или предложения улучшений. Избегайте комментариев в стиле &#171;+1&#187; или &#171;Спасибо&#187;."
+                   >добавить комментарий</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="разверните, чтобы увидеть все комментарии к сообщению" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+                                    <a name='new-answer'></a>
+                        <form id="post-form" action="/questions/699039/answer/submit" method="post"  class="post-form">
+                            <input type="hidden" id="post-id" value="699039" />
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false" />
+                            <input type="hidden" name="referrer" value=""/>
+                            <h2 class="space">Ваш ответ</h2>
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: false,
+                showLowRepImageUploadWarning: true,
+                reputationToPostImages: null,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;"> 
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">черновик сохранён</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">черновик удалён</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="46df54b013b3c520df4cd581c22c332a">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+
+                            <div style="position: relative;">
+                                
+                                            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Зарегистрируйтесь или <a id="login-link" href="/users/login?ssrc=question_page&returnurl=https%3a%2f%2fru.stackoverflow.com%2fquestions%2f699039%2f%25d0%259a%25d0%25b0%25d0%25ba-%25d0%25bf%25d0%25be%25d0%25b2%25d0%25b5%25d1%2580%25d0%25bd%25d1%2583%25d1%2582%25d1%258c-%25d0%25bc%25d0%25b0%25d1%2582%25d1%2580%25d0%25b8%25d1%2586%25d1%2583-%25d0%25bd%25d0%25b0-90-%25d0%25b3%25d1%2580%25d0%25b0%25d0%25b4%25d1%2583%25d1%2581%25d0%25be%25d0%25b2-%25d1%2581-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bd%25d0%25be%25d0%25b9-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bc%25d0%25b5%25d1%2580%25d0%25bd%25d0%25be%25d1%2581%25d1%2582%25d1%258c%23new-answer">войдите</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login" data-ga="[&quot;Sign Up&quot;,&quot;Sign Up Started - Google&quot;,&quot;New Post&quot;,null,null]">
+                            <svg aria-hidden="true" class="svg-icon native iconGoogle" width="18" height="18" viewBox="0 0 18 18"><g><path d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z" fill="#4285F4"/><path d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z" fill="#34A853"/><path d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07z" fill="#FBBC05"/><path d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z" fill="#EA4335"/></g></svg> Регистрация через Google
+                        </div>
+                        <div class="preferred-login facebook-login" data-ga="[&quot;Sign Up&quot;,&quot;Sign Up Started - Facebook&quot;,&quot;New Post&quot;,null,null]">
+                            <svg aria-hidden="true" class="svg-icon iconFacebook" width="18" height="18" viewBox="0 0 18 18"><path d="M1.88 1C1.4 1 1 1.4 1 1.88v14.24c0 .48.4.88.88.88h7.67v-6.2H7.46V8.4h2.09V6.61c0-2.07 1.26-3.2 3.1-3.2.88 0 1.64.07 1.87.1v2.16h-1.29c-1 0-1.19.48-1.19 1.18V8.4h2.39l-.31 2.42h-2.08V17h4.08c.48 0 .88-.4.88-.88V1.88c0-.48-.4-.88-.88-.88H1.88z" fill="#3C5A96"/></svg> Регистрация через Facebook
+                        </div>
+                        <div class="preferred-login stackexchange-login" data-ga="[&quot;Sign Up&quot;,&quot;Sign Up Navigation&quot;,&quot;New Post&quot;,null,null]">
+                            <svg aria-hidden="true" class="svg-icon native iconLogoGlyphXSm" width="18" height="18" viewBox="0 0 18 18"><g><path fill="#BCBBBB" d="M14 16v-5h2v7H2v-7h2v5z"/><path d="M5 15v-2h8v2H5zM12.09.72l4.5 6.06-1.2.9-4.51-6.06 1.21-.9zM8.34 4.3l.97-1.16 5.8 4.83-.96 1.16-5.8-4.83zm-1.9 3.36l.64-1.37 6.85 3.19-.63 1.37-6.85-3.2zM5.4 11.39l.38-1.67 7.42 1.48-.22 1.46-7.58-1.27z" fill="#F48024"/></g></svg> Регистрация через почту
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="hidden" name="use-google" class="use-google" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Отправить без регистрации</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Имя</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Почта</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="обязательна, не будет видна другим" />
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'https%3a%2f%2fru.stackoverflow.com%2fquestions%2f699039%2f%25d0%259a%25d0%25b0%25d0%25ba-%25d0%25bf%25d0%25be%25d0%25b2%25d0%25b5%25d1%2580%25d0%25bd%25d1%2583%25d1%2582%25d1%258c-%25d0%25bc%25d0%25b0%25d1%2582%25d1%2580%25d0%25b8%25d1%2586%25d1%2583-%25d0%25bd%25d0%25b0-90-%25d0%25b3%25d1%2580%25d0%25b0%25d0%25b4%25d1%2583%25d1%2581%25d0%25be%25d0%25b2-%25d1%2581-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bd%25d0%25be%25d0%25b9-%25d1%2580%25d0%25b0%25d0%25b7%25d0%25bc%25d0%25b5%25d1%2580%25d0%25bd%25d0%25be%25d1%2581%25d1%2582%25d1%258c%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Отправить без регистрации</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Имя</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Почта</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="обязательна, не будет видна другим" />
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+
+                            </div>
+
+                                                            <div class="form-submit cbt">
+                                        <input id="submit-button" type="submit" value="Отправить ответ" tabindex="110">
+                                    <a href="#" class="btn-clear discard-answer dno">отменить</a>
+
+<p class="privacy-policy-agreement">
+Публикуя ответ вы принимаете условия <a href='https://stackexchange.com/legal/privacy-policy' name='privacy' target='_blank'>политики конфиденциальности</a> и <a href='https://stackexchange.com/legal/terms-of-service' name='tos' target='_blank'>соглашение</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />                                </div>
+                        </form>
+
+
+
+                        <h2 class="bottom-notice" data-loc="1">
+Всё ещё ищете ответ?                            Ознакомьтесь с другими вопросами, отмеченными <a href="/questions/tagged/c%23" class="post-tag" title="показать вопросы с меткой [c#]" rel="tag">c#</a> , или <a href="/questions/ask">задайте свой вопрос</a>.                        </h2>
+            </div>
+        </div>
+                <div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+                            <div class="module question-stats">
+                    <table id="qinfo">
+                        <tr>
+                            <td>
+                                <p class="label-key">задан</p>
+                            </td>
+                            <td style="padding-left: 10px">
+                                <p class="label-key" title="2017-07-28 14:04:55Z"><b>6 месяцев назад</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="label-key">просмотрен</p>
+                            </td>
+
+                            <td style="padding-left: 10px">
+                                <p class="label-key">
+                                    <b>378 раз</b>
+                                </p>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td>
+                                    <p class="label-key">обновлён</p>
+                                </td>
+                                <td style="padding-left: 10px">
+                                    <p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2017-07-29 13:48:33Z">6 месяцев назад</a></b></p>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+                        
+<div id="dfp-tsb" class="everyonelovesstackoverflow"></div>
+<script>;window.clc=window.clc||{},window.clc.init=window.clc.init||function(a){var b=window,c=b.document;try{if("function"!=typeof[].indexOf||!window.addEventListener||!a.allowed)return;var d=new RegExp(a.allowed);if(!d.test(location.hostname))return;if(b.clc.options)for(var e in b.clc.options)a[e]=b.clc.options[e];b.clc.cmd="undefined"==typeof b.clc.cmd?[]:b.clc.cmd,b.clc.autoload=b.clc.autoload||function(){"function"==typeof b.clc.load?b.clc.load():b.clc.cmd.push(function(a){a.load()})};var f=a.wv;if(c.hidden&&f)return void c.addEventListener("visibilitychange",function b(){c.hidden||(window.clc.init(a),c.removeEventListener("visibilitychange",b))});b.clc.options=a,a.al&&b.clc.autoload();var g=/Trident/i.test(navigator.userAgent)?a.lib.replace(/(\.min)?\.js(\?v=[0-9a-fA-F]+)?$/,".ie$1.js$2"):a.lib,h=c.createElement("script");h.async=!0,h.src=g,c.body.appendChild(h)}catch(a){}},window.clc.loadDisplayAds=window.clc.loadDisplayAds||function(){function a(b){b.style.height=b.style.maxHeight=b.style.minHeight="auto",b.style.display="IFRAME"===b.tagName?"none":"block",[].forEach.call(b.children,a)}function b(a){new Image().src="https://"+e+"/stalled.gif?"+a}var c=window,d=c.document,e="clc.stackoverflow.com",f={slots:{lb:[[728,90]],mlb:[[728,90]],sb:[[300,250],[300,600]],"tag-sponsorship":[[730,135]]},ids:{"dfp-tlb":"lb","dfp-mlb":"mlb","dfp-tsb":"sb","dfp-tag":"tag-sponsorship","clc-tlb":"lb","clc-mlb":"mlb","clc-tsb":"sb"}},g=/^\/tags\//.test(location.pathname)||/^\/questions\/tagged\//.test(location.pathname)?"tag-pages":"question-pages",h=location.hostname;/^clc\./.test(location.hostname)&&(h="test/dev.stackoverflow.com");var i=[4385506061,4386578282,4386579572];return function(e){var j=(e&&0<e.length?e:Object.keys(f.ids)).map(function(a){return d.getElementById(a)}).filter(function(a){return!!a&&/^\s*$/.test(a.innerHTML)}).map(function(a){return a.id});if(0!==j.length){c.googletag=c.googletag||{},c.googletag.cmd=c.googletag.cmd||[],c.googletag.cmd.push(function(){var e=c.googletag,k=d.createElement("div");k.className="adsbox",k.id="clc-abd",k.style.position="absolute",k.style.pointerEvents="none",k.innerHTML="&nbsp;",d.body.appendChild(k);var l=e.pubads();l.enableSingleRequest(),l.addEventListener("slotRenderEnded",function(c){var e=c.serviceName,f=c.slot,g=c.lineItemId;try{var h=f.getSlotElementId(),j=[];h||j.push("id=0");var k=d.getElementById(h);if(!h||k?k.hasAttribute("data-clc-stalled")&&j.push("st=1"):j.push("el=0"),0!==j.length)return void b(j.join("&"));-1===i.indexOf(g)?k.setAttribute("data-clc-prefilled","true"):a(k),k.setAttribute("data-clc-ready","true")}catch(a){var l=d.getElementById("dfp-tsb")||d.getElementById("clc-tsb");l&&l.setAttribute("data-clc-ready","true"),b("e=1")}});var m=c.dfp_targeting||{};m&&Object.keys(m).forEach(function(a){l.setTargeting(a,m[a])});for(var n=0,o=j;n<o.length;n++){var p=o[n],q=f.ids[p],r=f.slots[q],s="/"+"248424177"+"/"+h+"/"+q+"/"+g,t=e.defineSlot(s,r,p);("tag-sponsorship"===q||"sb"==q)&&t.setCollapseEmptyDiv(!0,!0),t.addService(l),!1}e.enableServices();for(var p,u=0,v=j;u<v.length;u++)p=v[u],e.display(p)});var k=d.createElement("script");k.async=!0,k.src="https://www.googletagservices.com/tag/js/gpt.js",document.body.appendChild(k)}}}(),window.clc.init.call(null, {"lib":"https://cdn.sstatic.net/clc/clc.min.js?v=c6a16e8f9c18","style":"https://cdn.sstatic.net/clc/styles/clc.min.css?v=b18b3a2258df","u":"https://clc.stackoverflow.com/markup.js","wa":true,"kt":2000,"tto":true,"h":"clc.stackoverflow.com","allowed":"^(((talent\\.)?stackoverflow)|(blog\\.codinghorror)|(serverfault|askubuntu)|([^\\.]+\\.stackexchange))\\.com$","wv":true,"al":false});</script>            <script>
+                var dfp_targeting={Registered:['false'],'ru.so-tag':['c_sharp']};                                    clc.loadDisplayAds();
+            </script>
+            
+
+                <div class="module sidebar-related">
+                    <h4 id="h-related">Похожие</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer"><a href="/q/73294" title="Количество голосов («за» − «против»)"><div class="answer-votes answered-accepted default">1</div></a><a href="/questions/73294/%d0%9a%d0%b0%d0%ba-%d0%bf%d0%be%d0%b2%d0%b5%d1%80%d0%bd%d1%83%d1%82%d1%8c-%d1%82%d0%b0%d0%b1%d0%bb%d0%b8%d1%86%d1%83-pivot" class="question-hyperlink">Как повернуть таблицу (Pivot)?</a></div><div class="spacer"><a href="/q/76556" title="Количество голосов («за» − «против»)"><div class="answer-votes answered-accepted default">1</div></a><a href="/questions/76556/%d0%9f%d0%be%d0%b2%d0%b5%d1%80%d0%bd%d1%83%d1%82%d1%8c-%d1%82%d0%b5%d0%ba%d1%81%d1%82-%d0%bd%d0%b0-%d0%ba%d0%bd%d0%be%d0%bf%d0%ba%d0%b5" class="question-hyperlink">Повернуть текст на кнопке</a></div><div class="spacer"><a href="/q/271100" title="Количество голосов («за» − «против»)"><div class="answer-votes default">0</div></a><a href="/questions/271100/%d0%9a%d0%b0%d0%ba-%d0%bf%d0%be%d0%b2%d0%b5%d1%80%d0%bd%d1%83%d1%82%d1%8c-label-%d0%bd%d0%b0-90-%d0%b3%d1%80%d0%b0%d0%b4%d1%83%d1%81%d0%be%d0%b2" class="question-hyperlink">Как повернуть label на 90 градусов?</a></div><div class="spacer"><a href="/q/477650" title="Количество голосов («за» − «против»)"><div class="answer-votes answered-accepted default">2</div></a><a href="/questions/477650/%d0%9f%d0%be%d0%b2%d0%b5%d1%80%d0%bd%d1%83%d1%82%d1%8c-%d0%be%d0%b1%d1%8a%d0%b5%d0%ba%d1%82-%d1%81-%d0%be%d0%bf%d1%80%d0%b5%d0%b4%d0%b5%d0%bb%d0%b5%d0%bd%d0%bd%d0%be%d0%b9-%d1%81%d0%ba%d0%be%d1%80%d0%be%d1%81%d1%82%d1%8c%d1%8e" class="question-hyperlink">Повернуть объект с определенной скоростью</a></div><div class="spacer"><a href="/q/529689" title="Количество голосов («за» − «против»)"><div class="answer-votes answered-accepted default">-1</div></a><a href="/questions/529689/%d0%9d%d0%b0%d1%85%d0%be%d0%b6%d0%b4%d0%b5%d0%bd%d0%b8%d0%b5-%d1%84%d0%b0%d0%b7%d1%8b-%d0%9d%d0%b5%d1%8f%d0%b2%d0%bd%d0%be%d0%b5-%d0%bf%d1%80%d0%b5%d0%be%d0%b1%d1%80%d0%b0%d0%b7%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d1%82%d0%b8%d0%bf%d0%b0-void-%d0%b2-double-%d0%bd%d0%b5%d0%b2%d0%be%d0%b7%d0%bc%d0%be%d0%b6%d0%bd%d0%be" class="question-hyperlink">Нахождение фазы.Неявное преобразование типа &ldquo;void&rdquo; в &ldquo;double&rdquo; невозможно</a></div><div class="spacer"><a href="/q/546847" title="Количество голосов («за» − «против»)"><div class="answer-votes answered-accepted default">1</div></a><a href="/questions/546847/%d0%9a%d0%b0%d0%ba-%d0%bf%d0%be%d0%b2%d0%b5%d1%80%d0%bd%d1%83%d1%82%d1%8c-%d0%b8%d0%b7%d0%be%d0%b1%d1%80%d0%b0%d0%b6%d0%b5%d0%bd%d0%b8%d0%b5-%d0%b2-%d1%84%d0%b0%d0%b9%d0%bb%d0%b5" class="question-hyperlink">Как повернуть изображение в файле?</a></div><div class="spacer"><a href="/q/572376" title="Количество голосов («за» − «против»)"><div class="answer-votes answered-accepted default">3</div></a><a href="/questions/572376/%d0%a0%d0%b8%d1%81%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%bd%d0%b0-panel-winforms" class="question-hyperlink">Рисование на Panel (WInForms)</a></div><div class="spacer"><a href="/q/601717" title="Количество голосов («за» − «против»)"><div class="answer-votes default">0</div></a><a href="/questions/601717/%d0%9f%d0%be%d0%b2%d0%b5%d1%80%d0%bd%d1%83%d1%82%d1%8c-%d0%be%d0%b1%d1%8a%d0%b5%d0%ba%d1%82-%d0%bd%d0%b5-%d0%bf%d0%be%d0%b2%d0%be%d1%80%d0%b0%d1%87%d0%b8%d0%b2%d0%b0%d1%8f-%d1%81%d0%b5%d1%82%d0%ba%d1%83" class="question-hyperlink">Повернуть объект не поворачивая сетку</a></div><div class="spacer"><a href="/q/641690" title="Количество голосов («за» − «против»)"><div class="answer-votes default">0</div></a><a href="/questions/641690/%d0%a3%d0%bc%d0%bd%d0%be%d0%b6%d0%b5%d0%bd%d0%b8%d0%b5-%d0%bc%d0%b0%d1%82%d1%80%d0%b8%d1%86-%d1%80%d0%b0%d0%b7%d0%bd%d0%be%d0%b9-%d1%80%d0%b0%d0%b7%d0%bc%d0%b5%d1%80%d0%bd%d0%be%d1%81%d1%82%d0%b8" class="question-hyperlink">Умножение матриц разной размерности</a></div><div class="spacer"><a href="/q/767999" title="Количество голосов («за» − «против»)"><div class="answer-votes default">1</div></a><a href="/questions/767999/getkeyboardstate-%d0%be%d0%bf%d1%80%d0%b5%d0%b4%d0%b5%d0%bb%d0%b5%d0%bd%d0%b8%d0%b5-%d1%81%d0%be%d1%81%d1%82%d0%be%d1%8f%d0%bd%d0%b8%d1%8f-%d0%ba%d0%bb%d0%b0%d0%b2%d0%b8%d1%88%d0%b8" class="question-hyperlink">GetKeyboardState: определение состояния клавиши</a></div>
+                    </div>
+                </div>
+
+
+        </div>
+    <div id="feed-link">
+    <div id="feed-link-text">
+        <a href="/feeds/question/699039" title="лента для данного вопроса и его ответов">
+            <svg aria-hidden="true" class="svg-icon iconRss" width="18" height="18" viewBox="0 0 18 18"><path d="M1 3c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3zm14.5 12C15.5 8.1 9.9 2.5 3 2.5V5a10 10 0 0 1 10 10h2.5zm-5 0A7.5 7.5 0 0 0 3 7.5V10a5 5 0 0 1 5 5h2.5zm-5 0A2.5 2.5 0 0 0 3 12.5V15h2.5z"/></svg>
+            лента вопроса
+        </a>
+    </div>
+</div>
+    </div>
+<script>StackExchange.ready(function(){$.get('/posts/699039/ivc/4f2b');});</script>
+<noscript><div><img src="/posts/699039/ivc/4f2b" class="dno" alt="" width="0" height="0"></div></noscript><div style="display:none" id="prettify-lang">lang-cs</div></div>
+
+
+        </div>
+    </div>
+
+    <footer id="footer" class="s-footer js-footer" role="contentinfo">
+        <div class="-container">
+            <div class="g-row">
+                
+                    <nav class="-nav js-category _visible" data-name="default">
+                        <h5 class="-title"><a href="/">Stack Overflow на русском</a></h5>
+                        <ul class="-list">
+                                    <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 2 })" href="/tour">Тур</a></li>
+                                <li class="-item"><a href="/help" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 3 })">Справка</a></li>
+                                    <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 5 })" href="https://chat.stackexchange.com?tab=site&host=ru.stackoverflow.com">Чат</a></li>
+                            <li class="-item g-col"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 13 })" href="/contact">Связаться с нами</a></li>
+                                <li class="-item g-col"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 14 })" href="https://ru.meta.stackoverflow.com">Оставить отзыв</a></li>
+                                                            <li class="-item"><a onclick='StackExchange.switchMobile("on")' class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 12 })">Мобильная версия</a></li>
+                        </ul>
+                    </nav>
+                <nav class="-nav js-category _visible" data-name="default">
+                    <h5 class="-title"><a class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">Компания</a></h5>
+                    <ul class="-list">
+                                                    <li class="-item"><a href="https://stackoverflow.com" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 15})">Stack Overflow</a></li>
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/?utm_source=so-footer&utm_medium=referral&utm_campaign=brand-activation" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 19 })">Stack Overflow Business</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/jobs" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 17})">Вакансии для разработчиков</a></li>
+                                <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">О компании</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 27 })" href="https://stackoverflow.com/company/press">Упоминания в СМИ</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 7 })" href="https://stackexchange.com/legal">Соглашение</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 8 })" href="https://stackexchange.com/legal/privacy-policy">Политика конфиденциальности</a></li>
+                    </ul>
+                </nav>
+                <div class="-network g-row">
+                    <a href="#" class="-back-trigger js-back"><svg aria-hidden="true" class="svg-icon iconArrowLeftAlt" width="18" height="18" viewBox="0 0 18 18"><path d="M10.58 16L12 14.59 6.4 9 12 3.41 10.57 2l-7 7z"/></svg></a>
+                    <div>
+                        <h5 class="-title"><a href="https://stackexchange.com">Stack Exchange<br> Network</a></h5>
+                        <ul class="-list">
+                            <li class="-item"><a href="#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Technology">Technology</a></li>
+                            <li class="-item"><a href="#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Life / Arts">Life / Arts</a></li>
+                            <li class="-item"><a href="#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Culture / Recreation">Culture / Recreation</a></li>
+                            <li class="-item"><a href="#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Science">Science</a></li>
+                            <li class="-item"><a href="#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Other">Other</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <nav class="-nav js-category" data-name="Technology">
+        <ul class="-list">
+                <li class="-item"><a href="https://stackoverflow.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                <li class="-item"><a href="https://serverfault.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="system and network administrators">Server Fault</a></li>
+                <li class="-item"><a href="https://superuser.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="computer enthusiasts and power users">Super User</a></li>
+                <li class="-item"><a href="https://webapps.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="power users of web applications">Web Applications</a></li>
+                <li class="-item"><a href="https://askubuntu.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                <li class="-item"><a href="https://webmasters.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="pro webmasters">Webmasters</a></li>
+                <li class="-item"><a href="https://gamedev.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and independent game developers">Game Development</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://tex.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                <li class="-item"><a href="https://softwareengineering.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professionals, academics, and students working within the systems development life cycle">Software Engineering</a></li>
+                <li class="-item"><a href="https://unix.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                <li class="-item"><a href="https://apple.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                <li class="-item"><a href="https://wordpress.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="WordPress developers and administrators">WordPress Development</a></li>
+                <li class="-item"><a href="https://gis.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                <li class="-item"><a href="https://electronics.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://android.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                <li class="-item"><a href="https://security.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="information security professionals">Information Security</a></li>
+                <li class="-item"><a href="https://dba.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                <li class="-item"><a href="https://drupal.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Drupal developers and administrators">Drupal Answers</a></li>
+                <li class="-item"><a href="https://sharepoint.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="SharePoint enthusiasts">SharePoint</a></li>
+                <li class="-item"><a href="https://ux.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="user experience researchers and experts">User Experience</a></li>
+                <li class="-item"><a href="https://mathematica.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Wolfram Mathematica">Mathematica</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://salesforce.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                <li class="-item"><a href="https://expressionengine.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="administrators, end users, developers and designers for ExpressionEngine&#174; CMS">ExpressionEngine&#174; Answers</a></li>
+                <li class="-item"><a href="https://pt.stackoverflow.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programadores profissionais e entusiastas">Stack Overflow em Portugu&#234;s</a></li>
+                <li class="-item"><a href="https://blender.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who use Blender to create 3D graphics, animations, or games">Blender</a></li>
+                <li class="-item"><a href="https://networkengineering.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="network engineers">Network Engineering</a></li>
+                <li class="-item"><a href="https://crypto.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                <li class="-item"><a href="https://codereview.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="peer programmer code reviews">Code Review</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://magento.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of the Magento e-Commerce platform">Magento</a></li>
+                <li class="-item"><a href="https://softwarerecs.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people seeking specific software recommendations">Software Recommendations</a></li>
+                <li class="-item"><a href="https://dsp.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                <li class="-item"><a href="https://emacs.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those using, extending or developing Emacs">Emacs</a></li>
+                <li class="-item"><a href="https://raspberrypi.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                <li class="-item"><a href="https://ru.stackoverflow.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="программистов">Stack Overflow на русском</a></li>
+                <li class="-item"><a href="https://codegolf.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://es.stackoverflow.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programadores y profesionales de la inform&#225;tica">Stack Overflow en espa&#241;ol</a></li>
+                <li class="-item"><a href="https://ethereum.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Ethereum, the decentralized application platform and smart contract enabled blockchain">Ethereum</a></li>
+                <li class="-item"><a href="https://datascience.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Data science professionals, Machine Learning specialists, and those interested in learning more about the field">Data Science</a></li>
+                <li class="-item"><a href="https://arduino.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="developers of open-source hardware and software that is compatible with Arduino">Arduino</a></li>
+                <li class="-item"><a href="https://bitcoin.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Bitcoin crypto-currency enthusiasts">Bitcoin</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#technology" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (28)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Life / Arts">
+        <ul class="-list">
+                <li class="-item"><a href="https://photo.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                <li class="-item"><a href="https://scifi.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                <li class="-item"><a href="https://graphicdesign.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                <li class="-item"><a href="https://movies.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                <li class="-item"><a href="https://music.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                <li class="-item"><a href="https://worldbuilding.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="writers/artists using science, geography and culture to construct imaginary worlds and settings">Worldbuilding</a></li>
+                <li class="-item"><a href="https://cooking.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Life / Arts"><ul class="-list">
+                <li class="-item"><a href="https://diy.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="contractors and serious DIYers">Home Improvement</a></li>
+                <li class="-item"><a href="https://money.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                <li class="-item"><a href="https://academia.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="academics and those enrolled in higher education">Academia</a></li>
+                <li class="-item"><a href="https://law.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="legal professionals, students, and others with experience or interest in law">Law</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#lifearts" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (16)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Culture / Recreation">
+        <ul class="-list">
+                <li class="-item"><a href="https://english.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                <li class="-item"><a href="https://skeptics.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="scientific skepticism">Skeptics</a></li>
+                <li class="-item"><a href="https://judaism.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                <li class="-item"><a href="https://travel.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="road warriors and seasoned travelers">Travel</a></li>
+                <li class="-item"><a href="https://christianity.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                <li class="-item"><a href="https://ell.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="speakers of other languages learning English">English Language Learners</a></li>
+                <li class="-item"><a href="https://japanese.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Culture / Recreation"><ul class="-list">
+                <li class="-item"><a href="https://gaming.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                <li class="-item"><a href="https://bicycles.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                <li class="-item"><a href="https://rpg.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                <li class="-item"><a href="https://anime.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="anime and manga fans">Anime &amp; Manga</a></li>
+                <li class="-item"><a href="https://puzzling.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those who create, solve, and study puzzles">Puzzling</a></li>
+                <li class="-item"><a href="https://mechanics.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#culturerecreation" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (32)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Science">
+        <ul class="-list">
+                <li class="-item"><a href="https://mathoverflow.net" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional mathematicians">MathOverflow</a></li>
+                <li class="-item"><a href="https://math.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                <li class="-item"><a href="https://stats.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                <li class="-item"><a href="https://cstheory.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                <li class="-item"><a href="https://physics.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="active researchers, academics and students of physics">Physics</a></li>
+                <li class="-item"><a href="https://chemistry.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="scientists, academics, teachers and students">Chemistry</a></li>
+                <li class="-item"><a href="https://biology.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="biology researchers, academics, and students">Biology</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Science"><ul class="-list">
+                <li class="-item"><a href="https://cs.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                <li class="-item"><a href="https://philosophy.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#science" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (10)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Other">
+        <ul class="-list">
+                <li class="-item"><a href="https://meta.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                <li class="-item"><a href="https://stackapps.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                <li class="-item"><a href="https://api.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programmatic interaction with Stack Exchange sites">API</a></li>
+                <li class="-item"><a href="https://data.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="querying Stack Exchange data using SQL">Data</a></li>
+                <li class="-item"><a href="https://area51.stackexchange.com" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                    </ul>
+    </nav>
+                <div class="-copyright g-row jc-end">
+                    <div class="g-column jc-sp-between">
+                        <ul class="-list">
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link:4 })" href="https://stackoverflow.blog?blb=1">Блог</a></li>
+                            <li class="-item"><a href="https://www.facebook.com/officialstackoverflow/" class="-link">Facebook</a></li>
+                            <li class="-item"><a href="https://twitter.com/stackoverflow" class="-link">Твиттер</a></li>
+                            <li class="-item"><a href="https://linkedin.com/company/stack-overflow" class="-link">LinkedIn</a></li>
+                        </ul>
+
+                        <div>
+                            <p>
+дизайн сайта / логотип &#169; 2018 Stack Exchange Inc; пользовательское содержимое попадает под действие лицензии <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license" class="-link">cc by-sa 3.0</a>
+с <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" rel="license" class="-link">указанием ссылки на источник</a>.
+                                <span id="svnrev">rev&nbsp;2018.2.19.29044</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    </div>
+    </footer>
+    <noscript>
+        <div id="noscript-warning">Stack Overflow на русском лучше работает с включенным JavaScript
+            <img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno">
+        </div>
+    </noscript>
+
+<script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            StackExchange.ready(function () {
+
+                var trackingCodes = [
+                    'UA-5620270-49'
+                ];
+
+                        trackingCodes.push('UA-108242619-5');
+
+                StackExchange.ga.init({
+                    sendTitles: true,
+                    tracker: window.ga,
+                    trackingCodes: trackingCodes
+                });
+
+
+
+                    StackExchange.ga.setDimension('dimension2', '|c#|');
+
+                    StackExchange.ga.setDimension('dimension3', 'Questions/Show');
+
+                StackExchange.ga.trackPageView();
+            });
+            
+/**/
+            
+            var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+            (function() {
+                var ssl = 'https:' == document.location.protocol,
+                    s = document.getElementsByTagName('script')[0],
+                    qc = document.createElement('script');
+                 qc.async = true;
+                    qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                    s.parentNode.insertBefore(qc, s);
+                    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+/**/
+                 var sc = document.createElement('script');
+                    sc.async = true;
+                    sc.src = (ssl ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js';
+                    s.parentNode.insertBefore(sc, s);
+                    _comscore.push({ c1: "2", c2: "17440561" });
+            })();
+            
+
+</script>
+    <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter31923236 = new Ya.Metrika({
+                        id:31923236,
+                        clickmap:true,
+                        trackLinks:true,
+                        accurateTrackBounce:true
+                    });
+                } catch(e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/31923236" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        
+    
+    </body>
+</html>

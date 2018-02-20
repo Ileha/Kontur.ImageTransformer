@@ -1,5 +1,5 @@
 ﻿using System;
-using Kontur.ImageTransformer.Filter;
+using Kontur.ImageTransformer.Transform;
 
 namespace Kontur.ImageTransformer
 {
@@ -8,7 +8,7 @@ namespace Kontur.ImageTransformer
         public static void Main(string[] args) {
             using (var server = new AsyncHttpServer())
             {
-                server.Start("http://+:8080/", new grayscale(), new sepia(), new threshold());
+                server.Start("http://+:8080/", new rotate_cw());
                 Console.ReadKey(true);
             }
         }
