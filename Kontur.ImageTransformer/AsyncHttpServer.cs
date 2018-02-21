@@ -152,7 +152,7 @@ namespace Kontur.ImageTransformer
 
             StatusCode Code = new StatusCode(HttpStatusCode.OK, false);
             Bitmap result = null;
-            string Debug_result = "";
+            //string Debug_result = "";
 
             try
             {
@@ -166,9 +166,12 @@ namespace Kontur.ImageTransformer
                 using (Bitmap b = new Bitmap(listenerContext.Request.InputStream)) {
                     if (b.Height * b.Width > 1000000) { throw new StatusCode(HttpStatusCode.BadRequest, true); }
                     //if (DateTime.Now.Ticks - time > 9000000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
-                    //result = CropAndSetFilter(b, GetRectangleFromZero(digits[0], digits[1], digits[2], digits[3], b), GetFilter(method));
-                    GetFilter(method).GetRectBeforeTransform(ref digits[0], ref digits[1], ref digits[2], ref digits[3], b);
-                    Debug_result = "{x="+digits[0]+"; y="+digits[1]+"; w="+digits[2]+"; h="+digits[3]+"}";
+                    
+                    ABSTransform transform = GetFilter(method);
+                    Rectangle before_transf = transform.GetRectBeforeTransform(digits[0], digits[1], digits[2], digits[3], b);
+                    before_transf = GetRectangleFromZero(before_transf, b.Width, b.Height);
+                    Rectangle after_transf = GetRectangleFromZero(digits[0], digits[1], digits[2], digits[3], b.Height, b.Width);
+                    
                     //if (DateTime.Now.Ticks - time > 9500000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
                 }
             }
@@ -182,10 +185,8 @@ namespace Kontur.ImageTransformer
             }
             else
             {
-                //listenerContext.Response.ContentType = "image/png";
-                //result.Save(listenerContext.Response.OutputStream, System.Drawing.Imaging.ImageFormat.Png);
-                byte[] res = Encoding.UTF8.GetBytes(Debug_result);
-                listenerContext.Response.OutputStream.Write(res, 0, res.Length);
+                listenerContext.Response.ContentType = "image/png";
+                result.Save(listenerContext.Response.OutputStream, System.Drawing.Imaging.ImageFormat.Png);
                 listenerContext.Response.OutputStream.Dispose();
             }
 
@@ -221,60 +222,88 @@ namespace Kontur.ImageTransformer
                 }
             }
         }
-        private Rectangle GetRectangleFromZero(int x, int y, int w, int h, Bitmap image)
+        private Rectangle GetRectangleFromZero(Rectangle rect, int Width, int Height) {
+            return GetRectangleFromZero(rect.X, rect.Y, rect.Width, rect.Height, Width, Height);
+        }
+        private Rectangle GetRectangleFromZero(int x, int y, int w, int h, int Width, int Height)
         {
             int new_x = 0, new_y = 0, new_w = 0, new_h = 0;
 
             if (w <= 0 || h <= 0) { throw new StatusCode(HttpStatusCode.NoContent, true); }
-            if (Math.Abs(x) >= image.Width || Math.Abs(y) >= image.Height) { throw new StatusCode(HttpStatusCode.NoContent, true); }
+            if (Math.Abs(x) >= Width || Math.Abs(y) >= Height) { throw new StatusCode(HttpStatusCode.NoContent, true); }
 
             if (x < 0) { new_x = 0; new_w = w + x; }
-            else if (x > image.Width) { throw new StatusCode(HttpStatusCode.NoContent, true); }
+            else if (x > Width) { throw new StatusCode(HttpStatusCode.NoContent, true); }
             else { new_x = x; new_w = w; }
-            if (new_x + new_w > image.Width) { new_w = image.Width - new_x; }
+            if (new_x + new_w > Width) { new_w = Width - new_x; }
 
             if (y < 0) { new_y = 0; new_h = h + y; }
-            else if (y > image.Height) { throw new StatusCode(HttpStatusCode.NoContent, true); }
+            else if (y > Height) { throw new StatusCode(HttpStatusCode.NoContent, true); }
             else { new_y = y; new_h = h; }
-            if (new_y + new_h > image.Height) { new_h = image.Height - new_y; }
+            if (new_y + new_h > Height) { new_h = Height - new_y; }
 
             if (new_w <= 0 || new_h <= 0) { throw new StatusCode(HttpStatusCode.NoContent, true); }
 
             return new Rectangle(new_x, new_y, new_w, new_h);
         }
 
-        //public unsafe Bitmap CropAndSetFilter(Bitmap png, Rectangle selection, ABSTransform Filter)
-        //{
-        //    Bitmap result = new Bitmap(selection.Width, selection.Height, PixelFormat.Format32bppArgb);
-        //    BitmapData bd_new = result.LockBits(new Rectangle(0, 0, result.Width, result.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-        //    BitmapData bd_old = png.LockBits(new Rectangle(0, 0, png.Width, png.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
-        //    try
-        //    {
-        //        byte* curpos;
-        //        byte* new_pos;
+        public unsafe Bitmap CropAndSetFilter(Bitmap png, Rectangle before, Rectangle after, ABSTransform transform)
+        {
+            ABSBuilder build = transform.GetBuilder(after);
+            BitmapData bd_old = png.LockBits(new Rectangle(0, 0, png.Width, png.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+            try {
+                byte* curpos;
 
-        //        byte* a, r, g, b;
-        //        for (int h = selection.Y; h < selection.Height+selection.Y; h++)
-        //        {
-        //            curpos = ((byte*)bd_old.Scan0) + (h * bd_old.Stride) + (selection.X*4);
-        //            new_pos = ((byte*)bd_new.Scan0) + ((h - selection.Y) * bd_new.Stride);
-        //            for (int w = 0; w < selection.Width; w++)
-        //            {
-        //                *new_pos = *curpos; b = new_pos; new_pos++; curpos++;
-        //                *new_pos = *curpos; g = new_pos; new_pos++; curpos++;
-        //                *new_pos = *curpos; r = new_pos; new_pos++; curpos++;
-        //                *new_pos = *curpos; a = new_pos; new_pos++; curpos++;
+                for (int h = before.Y; h < before.Height + before.Y; h++) {
 
-        //                Filter.SetColor(ref *a, ref *r, ref *g, ref *b);
-        //            }
-        //        }
-        //    }
-        //    finally {
-        //        png.UnlockBits(bd_old);
-        //        png.Dispose();
-        //        result.UnlockBits(bd_new);
-        //    }
-        //    return result;
-        //}
+                    curpos = ((byte*)bd_old.Scan0) + (h * bd_old.Stride) + (selection.X * 4);
+                    for (int w = 0; w < selection.Width; w++)
+                    {
+                        *new_pos = *curpos; curpos++;
+                        *new_pos = *curpos; curpos++;
+                        *new_pos = *curpos; curpos++;
+                        *new_pos = *curpos; curpos++;
+
+                    }
+                }
+            }
+            finally {
+                png.UnlockBits(bd_old);
+                png.Dispose();
+                result.UnlockBits(bd_new);
+            }
+
+            //Bitmap result = new Bitmap(selection.Width, selection.Height, PixelFormat.Format32bppArgb);
+            //BitmapData bd_new = result.LockBits(new Rectangle(0, 0, result.Width, result.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            //BitmapData bd_old = png.LockBits(new Rectangle(0, 0, png.Width, png.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+            //try
+            //{
+            //    byte* curpos;
+            //    byte* new_pos;
+
+            //    byte* a, r, g, b;
+            //    for (int h = selection.Y; h < selection.Height + selection.Y; h++)
+            //    {
+            //        curpos = ((byte*)bd_old.Scan0) + (h * bd_old.Stride) + (selection.X * 4);
+            //        new_pos = ((byte*)bd_new.Scan0) + ((h - selection.Y) * bd_new.Stride);
+            //        for (int w = 0; w < selection.Width; w++)
+            //        {
+            //            *new_pos = *curpos; b = new_pos; new_pos++; curpos++;
+            //            *new_pos = *curpos; g = new_pos; new_pos++; curpos++;
+            //            *new_pos = *curpos; r = new_pos; new_pos++; curpos++;
+            //            *new_pos = *curpos; a = new_pos; new_pos++; curpos++;
+
+            //            Filter.SetColor(ref *a, ref *r, ref *g, ref *b);
+            //        }
+            //    }
+            //}
+            //finally
+            //{
+            //    png.UnlockBits(bd_old);
+            //    png.Dispose();
+            //    result.UnlockBits(bd_new);
+            //}
+            //return result;
+        }
     }
 }
