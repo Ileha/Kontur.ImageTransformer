@@ -171,7 +171,7 @@ namespace Kontur.ImageTransformer
                     Rectangle before_transf = transform.GetRectBeforeTransform(digits[0], digits[1], digits[2], digits[3], b);
                     before_transf = GetRectangleFromZero(before_transf, b.Width, b.Height);
                     Rectangle after_transf = GetRectangleFromZero(digits[0], digits[1], digits[2], digits[3], b.Height, b.Width);
-                    
+                    result = CropAndSetFilter(b, before_transf, after_transf, transform);
                     //if (DateTime.Now.Ticks - time > 9500000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
                 }
             }
@@ -255,23 +255,18 @@ namespace Kontur.ImageTransformer
                 byte* curpos;
 
                 for (int h = before.Y; h < before.Height + before.Y; h++) {
-
-                    curpos = ((byte*)bd_old.Scan0) + (h * bd_old.Stride) + (selection.X * 4);
-                    for (int w = 0; w < selection.Width; w++)
-                    {
-                        *new_pos = *curpos; curpos++;
-                        *new_pos = *curpos; curpos++;
-                        *new_pos = *curpos; curpos++;
-                        *new_pos = *curpos; curpos++;
-
+                    curpos = ((byte*)bd_old.Scan0) + (h * bd_old.Stride) + (before.X * 4);
+                    for (int w = 0; w < before.Width; w++) {
+                        build.AddToData(curpos);
+                        curpos+=4;
                     }
                 }
             }
             finally {
                 png.UnlockBits(bd_old);
                 png.Dispose();
-                result.UnlockBits(bd_new);
             }
+            return build.Bitmap;
 
             //Bitmap result = new Bitmap(selection.Width, selection.Height, PixelFormat.Format32bppArgb);
             //BitmapData bd_new = result.LockBits(new Rectangle(0, 0, result.Width, result.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);

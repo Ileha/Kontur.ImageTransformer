@@ -10,14 +10,27 @@ namespace Kontur.ImageTransformer.Transform
 {
     public unsafe class rotate_cw_builder : ABSBuilder {
         private byte* curpos;
+        private int width;
+        private int height;
+
         public rotate_cw_builder(Rectangle rect) : base(rect) {
-            curpos = ((byte*)BitmapData.Scan0);
+            height = 0;
+            width = BitmapData.Width-1;
+            curpos = ((byte*)BitmapData.Scan0) + (height * BitmapData.Stride) + (width * 4);
         }
         public override void AddToData(byte* pos) {
-            for (int i = 0; i < 4; i++) {
-                *curpos = *pos; pos++; curpos++;
-            }
+            *curpos = *pos; pos++; curpos++;
+            *curpos = *pos; pos++; curpos++;
+            *curpos = *pos; pos++; curpos++;
+            *curpos = *pos; pos++; curpos++;
 
+            height++;
+
+            if (height >= BitmapData.Height) {
+                height = 0;
+                width--;
+            }
+            curpos = ((byte*)BitmapData.Scan0) + (height * BitmapData.Stride) + (width * 4);
         }
     }
 
