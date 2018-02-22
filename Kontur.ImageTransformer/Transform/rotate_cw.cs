@@ -35,7 +35,7 @@ namespace Kontur.ImageTransformer.Transform
     }
 
     public class rotate_cw : ABSTransform {
-        public override string Name { get { return "rotate_cw"; } }
+        public override string Name { get { return "rotate-cw"; } }
 
         public override ABSBuilder GetBuilder(Rectangle rect) {
             return new rotate_cw_builder(rect);

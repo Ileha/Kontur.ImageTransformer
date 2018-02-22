@@ -13,6 +13,9 @@ namespace Kontur.ImageTransformer.Transform
 
         public abstract ABSBuilder GetBuilder(Rectangle rect);
         public abstract Rectangle GetRectBeforeTransform(int x, int y, int w, int h, Bitmap picture);
+        public Rectangle GetRectBeforeTransform(Rectangle rect, Bitmap picture) {
+            return GetRectBeforeTransform(rect.X, rect.Y, rect.Width, rect.Height, picture);
+        }
     }
 
     public abstract unsafe class ABSBuilder {

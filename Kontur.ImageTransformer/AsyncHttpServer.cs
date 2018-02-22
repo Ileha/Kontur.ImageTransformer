@@ -30,7 +30,7 @@ namespace Kontur.ImageTransformer
         public AsyncHttpServer()
         {
             listener = new HttpListener();
-            request_parser = new Regex("process/(?<method>[\\w]+)/(?<rectangle>[\\d-+,]+)");
+            request_parser = new Regex("process/(?<method>[\\w-]+)/(?<rectangle>[\\d-+,]+)");
             Filters = new Dictionary<string, ABSTransform>();
             clients = new ConcurrentQueue<client>();
             prosess_count = Environment.ProcessorCount - 1;
