@@ -8,7 +8,7 @@ namespace Kontur.ImageTransformer
         public static void Main(string[] args) {
             using (var server = new AsyncHttpServer())
             {
-                server.Start("http://+:8080/", new rotate_cw(), new rotate_ccw());
+                server.Start("http://+:8080/", new rotate_cw(), new rotate_ccw(), new flip_v(), new flip_h());
                 Console.ReadKey(true);
             }
         }

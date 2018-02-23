@@ -1,11 +1,9 @@
 ﻿<Properties StartupConfiguration="{9801585B-D1AA-4078-B9C4-7B7F8883E55E}|Default">
   <MonoDevelop.Ide.ItemProperties.Kontur.ImageTransformer PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Kontur.ImageTransformer/AsyncHttpServer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Kontur.ImageTransformer/client.cs">
     <Files>
-      <File FileName="Kontur.ImageTransformer/EntryPoint.cs" Line="11" Column="44" />
-      <File FileName="Kontur.ImageTransformer/AsyncHttpServer.cs" Line="252" Column="42" />
-      <File FileName="Kontur.ImageTransformer/Transform/rotate-cw.cs" Line="18" Column="45" />
-      <File FileName="Kontur.ImageTransformer/Transform/ABSTransform.cs" Line="13" Column="1" />
+      <File FileName="Kontur.ImageTransformer/EntryPoint.cs" Line="6" Column="28" />
+      <File FileName="Kontur.ImageTransformer/client.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

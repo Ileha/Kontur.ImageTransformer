@@ -37,17 +37,18 @@ namespace Kontur.ImageTransformer.Transform
     public class rotate_cw : ABSTransform {
         public override string Name { get { return "rotate-cw"; } }
 
-        public override ABSBuilder GetBuilder(Rectangle rect) {
-            return new rotate_cw_builder(rect);
+        public override ABSBuilder GetBuilder(Rectangle rect, Bitmap picture) {
+            return new rotate_cw_builder(GetRectangleFromZero(rect, picture.Height, picture.Width));
         }
 
         public override Rectangle GetRectBeforeTransform(int x, int y, int w, int h, Bitmap picture)
         {
-            int new_x = picture.Height - x;
-            int new_y = y;
-            new_x -= w;
+            Rectangle into = GetRectangleFromZero(x, y, w, h, picture.Height, picture.Width);
+            int new_x = picture.Height - into.X;
+            int new_y = into.Y;
+            new_x -= into.Width;
 
-            return new Rectangle(new_y, new_x, h, w);
+            return new Rectangle(new_y, new_x, into.Height, into.Width);
             //X = x * cos(alpha) — y * sin(alpha);
             //Y = x * sin(alpha) + y * cos(alpha);
         }
