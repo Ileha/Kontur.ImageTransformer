@@ -10,7 +10,6 @@ using System.Drawing.Imaging;
 using System.Collections.Generic;
 using Kontur.ImageTransformer.Transform;
 using System.Collections.Concurrent;
-using System.Text;
 //using System.Diagnostics;
 
 namespace Kontur.ImageTransformer
@@ -27,13 +26,14 @@ namespace Kontur.ImageTransformer
         private Dictionary<string, ABSTransform> Filters;
         private ConcurrentQueue<client> clients;
         private int prosess_count;
+
         public AsyncHttpServer()
         {
             listener = new HttpListener();
             request_parser = new Regex("process/(?<method>[\\w-]+)/(?<rectangle>[\\d-+,]+)");
             Filters = new Dictionary<string, ABSTransform>();
             clients = new ConcurrentQueue<client>();
-            prosess_count = Environment.ProcessorCount - 1;
+            prosess_count = Environment.ProcessorCount;
         }
 
         public void Start(string prefix, params ABSTransform[] filters)
@@ -100,7 +100,8 @@ namespace Kontur.ImageTransformer
                     if (listener.IsListening)
                     {
                         var context = listener.GetContext();
-                        //Console.WriteLine("have empty prosses: {0}", prosess_count);
+                        Console.WriteLine("have empty prosses: {0}", prosess_count);
+
                         if (prosess_count > 0) {
                             Runner(context, DateTime.Now.Ticks);
                         }

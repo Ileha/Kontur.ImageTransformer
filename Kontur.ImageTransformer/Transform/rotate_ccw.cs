@@ -12,11 +12,13 @@ namespace Kontur.ImageTransformer.Transform
         private byte* curpos;
         private int width;
         private int height;
+        private byte* start_pos;
 
         public rotate_ccw_builder(Rectangle rect) : base(rect) {
             height = BitmapData.Height-1;
             width = 0;
-            curpos = ((byte*)BitmapData.Scan0) + (height * BitmapData.Stride);
+            start_pos = ((byte*)BitmapData.Scan0);
+            curpos = start_pos + (height * BitmapData.Stride);
         }
 
         public override void AddToData(byte* pos) {
@@ -31,7 +33,7 @@ namespace Kontur.ImageTransformer.Transform
                 width++;
                 height = BitmapData.Height-1;
             }
-            curpos = ((byte*)BitmapData.Scan0) + (height * BitmapData.Stride) + (width * 4);
+            curpos = start_pos + (height * BitmapData.Stride) + (width * 4);
         }
     }
 

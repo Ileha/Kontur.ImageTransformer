@@ -8,12 +8,14 @@ namespace Kontur.ImageTransformer.Transform
         private byte* curpos;
         private int width;
         private int height;
+        private byte* start_pos;
 
         public flip_v_builder(Rectangle rect) : base(rect)
         {
             height = BitmapData.Height-1;
             width = 0;
-            curpos = ((byte*)BitmapData.Scan0)+(BitmapData.Stride*height);
+            start_pos = ((byte*)BitmapData.Scan0);
+            curpos = start_pos+(BitmapData.Stride * height);
         }
 
         public override void AddToData(byte* pos) {
@@ -27,7 +29,7 @@ namespace Kontur.ImageTransformer.Transform
             if (width >= BitmapData.Width) {
                 height--;
                 width = 0;
-                curpos = ((byte*)BitmapData.Scan0) + (height * BitmapData.Stride);
+                curpos = start_pos + (height * BitmapData.Stride);
             }
         }
     }

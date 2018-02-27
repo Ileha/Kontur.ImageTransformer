@@ -1,9 +1,8 @@
 ﻿<Properties StartupConfiguration="{9801585B-D1AA-4078-B9C4-7B7F8883E55E}|Default">
   <MonoDevelop.Ide.ItemProperties.Kontur.ImageTransformer PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Kontur.ImageTransformer/client.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Kontur.ImageTransformer/AsyncHttpServer.cs">
     <Files>
-      <File FileName="Kontur.ImageTransformer/EntryPoint.cs" Line="6" Column="28" />
-      <File FileName="Kontur.ImageTransformer/client.cs" Line="1" Column="1" />
+      <File FileName="Kontur.ImageTransformer/AsyncHttpServer.cs" Line="14" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
