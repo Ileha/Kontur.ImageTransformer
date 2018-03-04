@@ -1,12 +1,8 @@
 ﻿using Kontur.ImageTransformer.Exceptions;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kontur.ImageTransformer.Transform
 {
@@ -50,6 +46,8 @@ namespace Kontur.ImageTransformer.Transform
         private Bitmap result;
         private BitmapData data;
         public BitmapData BitmapData { get { return data; } }
+        protected byte* start_pos;
+
         public Bitmap Bitmap { 
             get {
                 result.UnlockBits(data);
@@ -59,6 +57,7 @@ namespace Kontur.ImageTransformer.Transform
         public ABSBuilder(Rectangle rect) {
             result = new Bitmap(rect.Width, rect.Height, PixelFormat.Format32bppArgb);
             data = result.LockBits(new Rectangle(0, 0, result.Width, result.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            start_pos = ((byte*)data.Scan0);
         }
         public abstract void AddToData(byte* pos);
     }

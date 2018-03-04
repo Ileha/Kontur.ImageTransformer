@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
 
 namespace Kontur.ImageTransformer.Transform
@@ -8,21 +7,20 @@ namespace Kontur.ImageTransformer.Transform
         private byte* curpos;
         private int width;
         private int height;
-        private byte* start_pos;
 
         public flip_v_builder(Rectangle rect) : base(rect)
         {
             height = BitmapData.Height-1;
             width = 0;
-            start_pos = ((byte*)BitmapData.Scan0);
             curpos = start_pos+(BitmapData.Stride * height);
         }
 
         public override void AddToData(byte* pos) {
-            *curpos = *pos; pos++; curpos++;
-            *curpos = *pos; pos++; curpos++;
-            *curpos = *pos; pos++; curpos++;
-            *curpos = *pos; pos++; curpos++;
+            for (int i = 0; i < 3; i++)
+            {
+                *curpos = *pos; pos++; curpos++;
+            }
+            *curpos = *pos;curpos++;
 
             width++;
 

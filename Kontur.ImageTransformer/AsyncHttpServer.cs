@@ -162,13 +162,14 @@ namespace Kontur.ImageTransformer
                 int[] digits = new int[4];
                 ParseURL(listenerContext.Request.RawUrl, out method, ref digits);
                 if (DateTime.Now.Ticks - time > 8500000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
-                using (Bitmap b = new Bitmap(listenerContext.Request.InputStream)) {
-                    if (b.Height * b.Width > 1000000) { throw new StatusCode(HttpStatusCode.BadRequest, true); }
+                using (Bitmap input = new Bitmap(listenerContext.Request.InputStream))
+                {
+                    if (input.Height * input.Width > 1000000) { throw new StatusCode(HttpStatusCode.BadRequest, true); }
                     if (DateTime.Now.Ticks - time > 9000000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
                     ABSTransform transform = GetFilter(method);
-                    Rectangle before_transf = transform.GetRectBeforeTransform(digits[0], digits[1], digits[2], digits[3], b);
+                    Rectangle before_transf = transform.GetRectBeforeTransform(digits[0], digits[1], digits[2], digits[3], input);
                     Rectangle after_transf = new Rectangle(digits[0], digits[1], digits[2], digits[3]);
-                    result = CropAndSetFilter(b, before_transf, after_transf, transform);
+                    result = CropAndSetFilter(input, before_transf, after_transf, transform);
                     if (DateTime.Now.Ticks - time > 9500000) { throw new StatusCode(HttpStatusCode.InternalServerError, true); }
                 }
             }
