@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.ItemProperties.Kontur.ImageTransformer PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Kontur.ImageTransformer/AsyncHttpServer.cs">
     <Files>
-      <File FileName="Kontur.ImageTransformer/AsyncHttpServer.cs" Line="103" Column="27" />
+      <File FileName="Kontur.ImageTransformer/AsyncHttpServer.cs" Line="11" Column="34" />
       <File FileName="Kontur.ImageTransformer/EntryPoint.cs" Line="1" Column="1" />
       <File FileName="Kontur.ImageTransformer/Transform/ABSTransform.cs" Line="15" Column="63" />
       <File FileName="Kontur.ImageTransformer/Transform/flip_h.cs" Line="18" Column="13" />

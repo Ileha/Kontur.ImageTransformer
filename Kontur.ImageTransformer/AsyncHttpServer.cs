@@ -24,7 +24,7 @@ namespace Kontur.ImageTransformer
 
         private Regex request_parser;
         private Dictionary<string, ABSTransform> Filters;
-        private ConcurrentQueue<client> clients;
+        private ConcurrentStack<client> clients;
         private int prosess_count;
 
         public AsyncHttpServer()
@@ -32,7 +32,7 @@ namespace Kontur.ImageTransformer
             listener = new HttpListener();
             request_parser = new Regex("process/(?<method>[\\w-]+)/(?<rectangle>[\\d-+,]+)");
             Filters = new Dictionary<string, ABSTransform>();
-            clients = new ConcurrentQueue<client>();
+            clients = new ConcurrentStack<client>();
             prosess_count = Environment.ProcessorCount;
         }
 
@@ -100,13 +100,13 @@ namespace Kontur.ImageTransformer
                     if (listener.IsListening)
                     {
                         var context = listener.GetContext();
-                        Console.WriteLine("have empty prosses: {0}", prosess_count);
+                        //Console.WriteLine("have empty prosses: {0}", prosess_count);
 
                         if (prosess_count > 0) {
                             Runner(context, DateTime.Now.Ticks);
                         }
                         else {
-                            clients.Enqueue(new client(context, DateTime.Now.Ticks));
+                            clients.Push(new client(context, DateTime.Now.Ticks));
                         }
                     }
                     //else Thread.Sleep(0);
@@ -128,7 +128,7 @@ namespace Kontur.ImageTransformer
                 HandleContextAsync(listenerContext, time);
                 client cli;
                 while (true) {
-                    if (clients.TryDequeue(out cli)) {
+                    if (clients.TryPop(out cli)) {
                         if (DateTime.Now.Ticks - cli.time > 9500000) {
                             //Console.WriteLine("have client bad");
                             cli.listenerContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
