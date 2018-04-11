@@ -18,7 +18,7 @@ namespace Kontur.ImageTransformer.ForTask
             }
         }
 
-        public TaskRepo(AsyncHttpServer listner) : base(listner) {
+        public TaskRepo(AsyncHttpServer listner, int id) : base(listner, id) {
 
         }
 

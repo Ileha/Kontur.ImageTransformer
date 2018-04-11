@@ -16,7 +16,7 @@ namespace Kontur.ImageTransformer
 
         private Thread listenerThread;
         private bool disposed;
-        private volatile bool isRunning;
+        public volatile bool isRunning;
 
         public ManualResetEvent stopper;
         public Regex request_parser;
@@ -34,7 +34,7 @@ namespace Kontur.ImageTransformer
             prosess_count = Environment.ProcessorCount;
             Tasks = new TaskWrapper[prosess_count*2];
             for (int i = 0; i < Tasks.Length; i++) {
-                Tasks[i] = new TaskRepo(this);
+                Tasks[i] = new TaskRepo(this, i);
             }
         }
 
@@ -77,6 +77,7 @@ namespace Kontur.ImageTransformer
                 listenerThread.Join();
 
                 isRunning = false;
+                stopper.Set();
             }
         }
 
@@ -102,7 +103,7 @@ namespace Kontur.ImageTransformer
                         var context = listener.GetContext();
                         //Console.WriteLine("have empty prosses: {0}", prosess_count);
                         clients.Push(new client(context, DateTime.Now.Ticks));
-                        stopper.Reset();
+                        stopper.Set();
                     }
                 }
                 catch (ThreadAbortException)
