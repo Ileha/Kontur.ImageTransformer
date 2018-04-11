@@ -8,11 +8,12 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Kontur.ImageTransformer</RootNamespace>
     <AssemblyName>Kontur.ImageTransformer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -52,6 +53,8 @@
     <Compile Include="client.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="Exceptions\StatusCode.cs" />
+    <Compile Include="ForTask\TaskWrapper.cs" />
+    <Compile Include="ForTask\TaskRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AsyncHttpServer.cs" />
     <Compile Include="Transform\ABSTransform.cs" />
